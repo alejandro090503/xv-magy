@@ -17,7 +17,7 @@
   --accent-deep: #5a2170;
   --paper: rgba(255,255,255,0.92);
   --ink: #1f1620;
-  --ink-soft: rgba(31,22,32,0.65);
+  --ink-soft: rgba(31,22,32,0.86);
   --hair: rgba(139,63,166,0.20);
 }
 
@@ -138,10 +138,10 @@ body {
 .env-interactive.open .env-flap-wrap{transform:rotateX(-175deg);}
 .env-open-content{overflow:hidden;max-height:0;opacity:0;transition:max-height .55s .3s ease,opacity .4s .38s ease;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 20px;text-align:center;pointer-events:none;}
 .env-interactive.open .env-open-content{max-height:240px;opacity:1;pointer-events:auto;}
-.env-mailbox-icon{width:40px;height:40px;color:#a67900;margin-top:10px;}
+.env-mailbox-icon{width:40px;height:40px;color:#5c4300;margin-top:10px;}
 .env-title{font-family:var(--font-cormorant),serif;font-size:30px;color:#5a2170;letter-spacing:.5px;line-height:1.2;}
 .env-desc{font-family:var(--font-cormorant),serif;font-size:13px;font-style:italic;color:rgba(90,33,112,.80);line-height:1.75;}
-.env-tap-hint{font-family:var(--font-lato),sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#a67900;opacity:1;margin-top:14px;transition:opacity .3s;text-align:center;}
+.env-tap-hint{font-family:var(--font-lato),sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#5c4300;opacity:1;margin-top:14px;transition:opacity .3s;text-align:center;}
 .env-interactive.open ~ .env-tap-hint{opacity:0;}
 @keyframes env-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 @media (prefers-reduced-motion: reduce){.env-body{animation:none;}}

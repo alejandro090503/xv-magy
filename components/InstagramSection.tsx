@@ -1,5 +1,12 @@
 "use client";
 
+/* ══════════════════════════════════════════════════════════════════
+   PENDIENTE: reemplazar por el link real del álbum de Google Drive
+   Cambiar SOLO esta línea y regenerar el QR con:
+     python scripts/gen-qr-album.py "<URL_REAL>"
+   ══════════════════════════════════════════════════════════════════ */
+const URL_ALBUM = "https://xv-magy.vercel.app";
+
 export default function InstagramSection() {
   return (
     <section style={{ padding: "64px 26px" }}>
@@ -65,20 +72,18 @@ export default function InstagramSection() {
             Escanea el código y comparte los mejores momentos de la fiesta en el álbum.
           </p>
 
-          {/* Caja placeholder — PENDIENTE: generar QR real cuando se tenga la URL del álbum de Magy */}
+          {/* Caja del QR con marco dorado */}
+          {/* PENDIENTE: reemplazar por el link real del álbum de Google Drive
+              (constante URL_ALBUM arriba + regenerar /imagenes/qr-album.png) */}
           <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 220,
-            height: 220,
-            margin: "0 auto 18px",
+            display: "inline-block",
             padding: 14,
             background: "#fbf7ff",
-            border: "1px dashed rgba(166,124,1,0.55)",
+            border: "1px solid rgba(166,124,1,0.55)",
             borderRadius: 18,
             boxShadow: "0 4px 22px rgba(166,124,1,0.20), inset 0 0 0 4px rgba(255,255,255,0.7)",
             position: "relative",
+            marginBottom: 18,
           }}>
             {/* Esquinas decorativas doradas */}
             {(["tl","tr","bl","br"] as const).map((corner) => {
@@ -97,23 +102,47 @@ export default function InstagramSection() {
                 </div>
               );
             })}
-            <span style={{
-              fontFamily: "var(--font-cormorant), serif",
-              fontStyle: "italic",
-              fontSize: 17,
-              color: "#5a2170",
-              opacity: 0.75,
-              textAlign: "center",
-            }}>
-              Próximamente
-            </span>
+
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/imagenes/qr-album.png"
+              alt="Código QR del álbum compartido — escanea para entrar"
+              width={220}
+              height={220}
+              style={{ display: "block", borderRadius: 8, width: 220, height: 220 }}
+            />
+          </div>
+
+          {/* En móvil nadie escanea el QR desde la misma pantalla: link tocable */}
+          <div style={{ marginBottom: 22 }}>
+            <a
+              href={URL_ALBUM}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                padding: "13px 30px",
+                borderRadius: 999,
+                background: "linear-gradient(135deg,#5a2170 0%,#8b3fa6 100%)",
+                color: "#ffffff",
+                textDecoration: "none",
+                fontFamily: "var(--font-cormorant), serif",
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 2.4,
+                textTransform: "uppercase",
+                boxShadow: "0 6px 20px rgba(90,33,112,0.28)",
+              }}
+            >
+              Abrir el álbum
+            </a>
           </div>
 
           <p style={{
             fontFamily: "var(--font-cormorant), serif",
             fontStyle: "italic",
             fontSize: 15,
-            color: "rgba(31,22,32,0.65)",
+            color: "rgba(31,22,32,0.86)",
             letterSpacing: 0.4,
             lineHeight: 1.55,
             marginBottom: 0,
@@ -131,7 +160,7 @@ export default function InstagramSection() {
           <p style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: 13,
-            color: "rgba(31,22,32,0.50)",
+            color: "rgba(31,22,32,0.76)",
             letterSpacing: 1,
             fontStyle: "italic",
           }}>
@@ -140,7 +169,7 @@ export default function InstagramSection() {
               href="https://www.instagram.com/elysium.invitaciones"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "#8b3fa6", textDecoration: "none", fontWeight: 600 }}
+              style={{ color: "#6d2c86", textDecoration: "none", fontWeight: 600 }}
             >
               @elysium.invitaciones
             </a>

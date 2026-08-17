@@ -68,7 +68,7 @@ function Ring({ value, label, max, color, glowColor }: RingProps) {
             fontSize: 8,
             letterSpacing: "1.6px",
             textTransform: "uppercase",
-            color: "#8b3fa6",
+            color: "#6d2c86",
             marginTop: 2,
             opacity: 0.78,
           }}>

@@ -163,20 +163,20 @@ export default function SplashScreen({ onOpen }: Props) {
   );
 }
 
-/* Partículas — colores que destacan en fondo blush */
+/* Partículas — luces de linterna flotando (ámbar/oro) */
 const PARTICLES = [
-  { left: "8%",  size: 5, dur: 8,  del: 0,   color: "#8b3fa6" },
-  { left: "22%", size: 3, dur: 11, del: 1.2, color: "#d19d01" },
-  { left: "38%", size: 7, dur: 7,  del: 0.5, color: "#d9a6f0" },
-  { left: "53%", size: 4, dur: 9,  del: 2.1, color: "#8b3fa6" },
-  { left: "67%", size: 5, dur: 10, del: 0.8, color: "#d19d01" },
-  { left: "81%", size: 3, dur: 8,  del: 1.7, color: "#d9a6f0" },
-  { left: "15%", size: 6, dur: 12, del: 3,   color: "#8b3fa6" },
-  { left: "47%", size: 4, dur: 9,  del: 2.5, color: "#d19d01" },
-  { left: "72%", size: 5, dur: 11, del: 0.3, color: "#d9a6f0" },
-  { left: "91%", size: 3, dur: 8,  del: 1.5, color: "#8b3fa6" },
-  { left: "31%", size: 6, dur: 10, del: 3.5, color: "#d19d01" },
-  { left: "60%", size: 4, dur: 7,  del: 2.8, color: "#d9a6f0" },
+  { left: "8%",  size: 5, dur: 8,  del: 0,   color: "#ffb545" },
+  { left: "22%", size: 3, dur: 11, del: 1.2, color: "#f5c542" },
+  { left: "38%", size: 7, dur: 7,  del: 0.5, color: "#ffe9a8" },
+  { left: "53%", size: 4, dur: 9,  del: 2.1, color: "#ffb545" },
+  { left: "67%", size: 5, dur: 10, del: 0.8, color: "#f5c542" },
+  { left: "81%", size: 3, dur: 8,  del: 1.7, color: "#ffe9a8" },
+  { left: "15%", size: 6, dur: 12, del: 3,   color: "#ffb545" },
+  { left: "47%", size: 4, dur: 9,  del: 2.5, color: "#f5c542" },
+  { left: "72%", size: 5, dur: 11, del: 0.3, color: "#ffe9a8" },
+  { left: "91%", size: 3, dur: 8,  del: 1.5, color: "#ffb545" },
+  { left: "31%", size: 6, dur: 10, del: 3.5, color: "#f5c542" },
+  { left: "60%", size: 4, dur: 7,  del: 2.8, color: "#ffe9a8" },
 ];
 
 function Particles() {
@@ -191,7 +191,8 @@ function Particles() {
           height: p.size,
           borderRadius: "50%",
           background: p.color,
-          opacity: 0.55,
+          boxShadow: `0 0 ${p.size * 3}px ${p.size * 0.9}px ${p.color}`,
+          opacity: 0.72,
           animation: `floatUp ${p.dur}s ${p.del}s linear infinite`,
           pointerEvents: "none",
         }} />

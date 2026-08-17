@@ -2,16 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 
 const PARTICLES = [
-  { left: "7%",  size: 4, dur: 9,  del: 0,   color: "#8b3fa6" },
-  { left: "21%", size: 3, dur: 12, del: 1.4, color: "#d19d01" },
-  { left: "36%", size: 5, dur: 8,  del: 0.6, color: "#d9a6f0" },
-  { left: "54%", size: 3, dur: 10, del: 2.2, color: "#8b3fa6" },
-  { left: "69%", size: 5, dur: 11, del: 0.9, color: "#d19d01" },
-  { left: "84%", size: 3, dur: 9,  del: 1.8, color: "#d9a6f0" },
-  { left: "13%", size: 6, dur: 13, del: 3.1, color: "#8b3fa6" },
-  { left: "47%", size: 4, dur: 10, del: 2.7, color: "#d19d01" },
-  { left: "75%", size: 5, dur: 12, del: 0.4, color: "#d9a6f0" },
-  { left: "91%", size: 3, dur: 8,  del: 1.6, color: "#8b3fa6" },
+  { left: "7%",  size: 4, dur: 9,  del: 0,   color: "#ffb545" },
+  { left: "21%", size: 3, dur: 12, del: 1.4, color: "#f5c542" },
+  { left: "36%", size: 5, dur: 8,  del: 0.6, color: "#ffe9a8" },
+  { left: "54%", size: 3, dur: 10, del: 2.2, color: "#ffb545" },
+  { left: "69%", size: 5, dur: 11, del: 0.9, color: "#f5c542" },
+  { left: "84%", size: 3, dur: 9,  del: 1.8, color: "#ffe9a8" },
+  { left: "13%", size: 6, dur: 13, del: 3.1, color: "#ffb545" },
+  { left: "47%", size: 4, dur: 10, del: 2.7, color: "#f5c542" },
+  { left: "75%", size: 5, dur: 12, del: 0.4, color: "#ffe9a8" },
+  { left: "91%", size: 3, dur: 8,  del: 1.6, color: "#ffb545" },
 ];
 
 /** Esquina ornamental */
@@ -172,7 +172,8 @@ export default function Hero() {
           width: p.size, height: p.size,
           borderRadius: "50%",
           background: p.color,
-          opacity: 0.55,
+          boxShadow: `0 0 ${p.size * 3}px ${p.size * 0.9}px ${p.color}`,
+          opacity: 0.72,
           animation: `floatUp ${p.dur}s ${p.del}s linear infinite`,
           pointerEvents: "none",
         }} />

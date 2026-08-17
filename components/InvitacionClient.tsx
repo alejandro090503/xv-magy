@@ -52,16 +52,17 @@ export default function InvitacionClient() {
           position: "relative",
           overflowX: "clip",
           zIndex: 1,
-          backgroundColor: "rgba(251,247,255,0.68)",
-          backdropFilter: "blur(1.5px)",
-          WebkitBackdropFilter: "blur(1.5px)",
+          backgroundColor: "rgba(251,247,255,0.72)",
+          backdropFilter: "blur(2.5px)",
+          WebkitBackdropFilter: "blur(2.5px)",
           backgroundImage: `
-            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><g transform='translate(100,100)'><ellipse rx='16' ry='28' fill='%238b3fa6' fill-opacity='.038' transform='rotate(0) translate(0,-12)'/><ellipse rx='16' ry='28' fill='%23e4c2f5' fill-opacity='.032' transform='rotate(72) translate(0,-12)'/><ellipse rx='16' ry='28' fill='%238b3fa6' fill-opacity='.032' transform='rotate(144) translate(0,-12)'/><ellipse rx='16' ry='28' fill='%23e4c2f5' fill-opacity='.032' transform='rotate(216) translate(0,-12)'/><ellipse rx='16' ry='28' fill='%238b3fa6' fill-opacity='.032' transform='rotate(288) translate(0,-12)'/><circle r='8' fill='%23d19d01' fill-opacity='.060'/></g></svg>"),
-            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><g transform='translate(50,50)'><ellipse rx='9' ry='17' fill='%23e4c2f5' fill-opacity='.030' transform='rotate(36) translate(0,-7)'/><ellipse rx='9' ry='17' fill='%238b3fa6' fill-opacity='.025' transform='rotate(108) translate(0,-7)'/><ellipse rx='9' ry='17' fill='%23e4c2f5' fill-opacity='.025' transform='rotate(180) translate(0,-7)'/><ellipse rx='9' ry='17' fill='%238b3fa6' fill-opacity='.025' transform='rotate(252) translate(0,-7)'/><ellipse rx='9' ry='17' fill='%23e4c2f5' fill-opacity='.025' transform='rotate(324) translate(0,-7)'/><circle r='4.5' fill='%23d19d01' fill-opacity='.048'/></g></svg>")
+            radial-gradient(circle at 22% 12%, rgba(209,157,1,0.055) 0 2.5px, transparent 3px),
+            radial-gradient(circle at 71% 41%, rgba(209,157,1,0.045) 0 3.5px, transparent 4px),
+            radial-gradient(circle at 44% 78%, rgba(228,194,245,0.060) 0 3px, transparent 3.5px),
+            radial-gradient(circle at 88% 91%, rgba(209,157,1,0.040) 0 2px, transparent 2.5px)
           `,
           backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px, 100px 100px",
-          backgroundPosition: "0 0, 50px 50px",
+          backgroundSize: "260px 260px, 340px 340px, 300px 300px, 220px 220px",
         }}
       >
         {/* HERO — con su asset de fondo propio */}
@@ -130,6 +131,9 @@ export default function InvitacionClient() {
         <ScrollReveal>
           <Ubicacion />
         </ScrollReveal>
+
+        {/* ANCLA — a partir de aquí (ya pasada Ubicación) rotan los fondos */}
+        <div id="fondos-inicio" aria-hidden="true" />
 
         {/* CALENDARIO */}
         <ScrollReveal>

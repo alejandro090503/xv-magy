@@ -21,7 +21,7 @@ export default function CalendarioBtn() {
         fontSize: 13,
         letterSpacing: 5,
         textTransform: "uppercase",
-        color: "#8b3fa6",
+        color: "#6d2c86",
         marginBottom: 8,
         opacity: 0.85,
       }}>

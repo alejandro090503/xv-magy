@@ -15,14 +15,17 @@ import { useEffect, useRef, useState } from "react";
  */
 
 const FONDOS = [
-  "01-linternas-lago",
-  "02-linternas-lila",
-  "03-cielo-lavanda",
-  "04-bokeh-estrellas",
-  "05-linternas-oro",
+  "01-castillo-linternas",
+  "02-cielo-lila-linternas",
+  "03-lago-linternas",
+  "04-linternas-cielo",
+  "05-palacio-linternas",
 ] as const;
 
-const MAX_OPACITY = 0.65;
+/** Id del ancla que marca el final de la seccion Ubicacion. */
+const ANCLA_INICIO = "fondos-inicio";
+
+const MAX_OPACITY = 0.92;
 const N = FONDOS.length;
 
 export default function FondosScroll() {
@@ -40,9 +43,14 @@ export default function FondosScroll() {
 
     const pintar = () => {
       const doc = document.documentElement;
-      // El hero ocupa el primer viewport y lleva su propio asset dedicado,
-      // así que la rotación de fondos empieza justo cuando el hero sale.
-      const inicio = window.innerHeight;
+      // El primer fondo se mantiene durante hero + frase + familia + fecha +
+      // countdown + ubicacion. La rotacion arranca en el ancla que se pinta
+      // justo DESPUES de la seccion Ubicacion; si no existe, se cae al
+      // comportamiento anterior (un viewport).
+      const ancla = document.getElementById(ANCLA_INICIO);
+      const inicio = ancla
+        ? ancla.getBoundingClientRect().top + window.scrollY
+        : window.innerHeight;
       const alcance = doc.scrollHeight - window.innerHeight - inicio;
       const p =
         alcance > 0
@@ -151,7 +159,7 @@ export default function FondosScroll() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(251,247,255,0.55) 0%, rgba(239,202,255,0.28) 35%, rgba(239,202,255,0.30) 65%, rgba(251,247,255,0.58) 100%)",
+            "linear-gradient(180deg, rgba(251,247,255,0.26) 0%, rgba(239,202,255,0.10) 35%, rgba(239,202,255,0.12) 65%, rgba(251,247,255,0.30) 100%)",
         }}
       />
     </div>

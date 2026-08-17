@@ -25,7 +25,7 @@ export default function Footer() {
         fontSize: 15,
         letterSpacing: 4,
         textTransform: "uppercase",
-        color: "#8b3fa6",
+        color: "#6d2c86",
         marginTop: 6,
       }}>
         III · Octubre · MMXXVI
@@ -41,7 +41,7 @@ export default function Footer() {
         fontFamily: "var(--font-cormorant), serif",
         fontStyle: "italic",
         fontSize: 13,
-        color: "rgba(31,22,32,0.40)",
+        color: "rgba(31,22,32,0.68)",
         letterSpacing: 1,
       }}>
         Con mucho cariño por{" "}
@@ -49,7 +49,7 @@ export default function Footer() {
           href="https://www.instagram.com/elysium.invitaciones"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "#8b3fa6", textDecoration: "none" }}
+          style={{ color: "#6d2c86", textDecoration: "none" }}
         >
           @elysium.invitaciones
         </a>

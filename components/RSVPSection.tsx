@@ -134,7 +134,7 @@ export default function RSVPSection() {
     fontWeight: 600,
     fontSize: 15,
     letterSpacing: 1.5,
-    color: active ? (isYes ? "#5a2170" : "#5a2170") : "#a3678b",
+    color: active ? (isYes ? "#5a2170" : "#5a2170") : "#7d4a68",
     cursor: frozen ? "not-allowed" : "pointer",
     transition: "all .2s",
     opacity: frozen ? 0.55 : 1,
@@ -213,7 +213,7 @@ export default function RSVPSection() {
           textAlign: "center",
           fontFamily: "var(--font-cormorant), serif",
           fontStyle: "italic", fontWeight: 500, fontSize: 15,
-          color: "#8b3fa6", letterSpacing: 2, marginBottom: 18,
+          color: "#6d2c86", letterSpacing: 2, marginBottom: 18,
         }}>
           Favor de confirmar tu asistencia a la brevedad
         </p>
