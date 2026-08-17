@@ -1,18 +1,17 @@
 "use client";
+import { useT } from "@/lib/i18n";
 
-const GCAL_URL = (() => {
+const gcalUrl = (title: string, details: string) => {
   const base = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-  const title = encodeURIComponent("XV Años de Magy");
-  const details = encodeURIComponent(
-    "Celebración de XV Años de Magaly · West Valley City, UT."
-  );
   const location = encodeURIComponent("West Valley City, UT, USA");
   // 2026-10-03 12:00 MDT → UTC = 2026-10-03T18:00:00Z
   const dates = "20261003T180000Z/20261004T080000Z";
-  return `${base}&text=${title}&dates=${dates}&details=${details}&location=${location}`;
-})();
+  return `${base}&text=${encodeURIComponent(title)}&dates=${dates}&details=${encodeURIComponent(details)}&location=${location}`;
+};
 
 export default function CalendarioBtn() {
+  const t = useT();
+  const GCAL_URL = gcalUrl(t("calEventTitle"), t("calEventDetails"));
   return (
     <section style={{ padding: "40px 26px 64px", textAlign: "center" }}>
       <p style={{
@@ -25,7 +24,7 @@ export default function CalendarioBtn() {
         marginBottom: 8,
         opacity: 0.85,
       }}>
-        No lo olvides
+        {t("calKicker")}
       </p>
       <h2 style={{
         fontFamily: "var(--font-great-vibes), cursive",
@@ -40,7 +39,7 @@ export default function CalendarioBtn() {
         overflow: "visible",
         display: "inline-block",
       }}>
-        Guárdalo
+        {t("calTitle")}
       </h2>
       <p style={{
         fontFamily: "var(--font-cormorant), serif",
@@ -51,7 +50,7 @@ export default function CalendarioBtn() {
         opacity: 0.70,
         marginBottom: 20,
       }}>
-        Agrega el evento a tu calendario
+        {t("calSub")}
       </p>
       <a
         href={GCAL_URL}
@@ -74,7 +73,7 @@ export default function CalendarioBtn() {
           transition: "opacity .3s,transform .3s",
         }}
       >
-        Añadir a Google Calendar
+        {t("calButton")}
       </a>
     </section>
   );

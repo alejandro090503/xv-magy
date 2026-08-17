@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useT } from "@/lib/i18n";
 
 const VIDEO_ENVELOPES =
   "https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/video/xv-magy/envelopes.mp4";
@@ -21,6 +22,7 @@ interface Props {
 type Stage = "sobre" | "v1" | "v2" | "done";
 
 export default function IntroSequence({ onUnlock, onFinish }: Props) {
+  const t = useT();
   const rootRef = useRef<HTMLDivElement>(null);
   const v1Ref = useRef<HTMLVideoElement>(null);
   const v2Ref = useRef<HTMLVideoElement>(null);
@@ -31,8 +33,8 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), 60);
-    return () => clearTimeout(t);
+    const id = setTimeout(() => setReady(true), 60);
+    return () => clearTimeout(id);
   }, []);
 
   /* ── Salida: crossfade suave del overlay hacia la invitación ── */
@@ -158,7 +160,7 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
         onClick={handleTap}
         role="button"
         tabIndex={0}
-        aria-label="Toca para abrir la invitación"
+        aria-label={t("introTapAria")}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleTap(); }}
         style={{
           position: "absolute",
@@ -185,7 +187,7 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); handleTap(); }}
-            aria-label="Toca para abrir la invitación"
+            aria-label={t("introTapAria")}
             style={{
               position: "relative",
               pointerEvents: "auto",
@@ -209,7 +211,7 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
               cursor: "pointer",
             }}
           >
-            Toca para abrir
+            {t("introTap")}
           </button>
           </div>
         )}
@@ -261,7 +263,7 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
             cursor: "pointer",
           }}
         >
-          Saltar
+          {t("introSkip")}
         </button>
       )}
     </div>

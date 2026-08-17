@@ -1,4 +1,5 @@
 "use client";
+import { useT } from "@/lib/i18n";
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 
 export interface MusicFabHandle {
@@ -6,6 +7,7 @@ export interface MusicFabHandle {
 }
 
 const MusicFab = forwardRef<MusicFabHandle>((_, ref) => {
+  const t = useT();
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -111,7 +113,7 @@ const MusicFab = forwardRef<MusicFabHandle>((_, ref) => {
       {/* Vinyl button */}
       <button
         onClick={toggle}
-        aria-label={playing ? "Pausar música" : "Reproducir música"}
+        aria-label={playing ? t("musicPause") : t("musicPlay")}
         style={{
           position: "relative",
           width: "100%",

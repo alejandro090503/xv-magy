@@ -1,4 +1,5 @@
 "use client";
+import { useT } from "@/lib/i18n";
 
 function LocationCard({
   title,
@@ -15,6 +16,7 @@ function LocationCard({
   image: string;
   imageAlt: string;
 }) {
+  const t = useT();
   return (
     <div style={{
       position: "relative",
@@ -172,7 +174,7 @@ function LocationCard({
             boxShadow: "0 4px 16px rgba(90,33,112,0.30)",
           }}
         >
-          Cómo Llegar
+          {t("locButton")}
         </a>
       </div>
     </div>
@@ -180,6 +182,7 @@ function LocationCard({
 }
 
 export default function Ubicacion() {
+  const t = useT();
   return (
     <section style={{ padding: "64px 26px" }}>
       <p style={{
@@ -193,7 +196,7 @@ export default function Ubicacion() {
         marginBottom: 8,
         opacity: 0.85,
       }}>
-        Te esperamos en
+        {t("locKicker")}
       </p>
       <h2 style={{
         fontFamily: "var(--font-great-vibes), cursive",
@@ -206,25 +209,25 @@ export default function Ubicacion() {
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        Ubicación
+        {t("locTitle")}
       </h2>
 
       <LocationCard
         title="St. Martin de Porres Catholic Church"
-        city="West Valley City, Utah"
+        city={t("locCity")}
         time="12:00 PM"
         mapsUrl="https://maps.app.goo.gl/Basx8tHwjSJSwvTm9?g_st=ic"
         image="/iglesia.webp"
-        imageAlt="Ilustración en acuarela de St. Martin de Porres Catholic Church"
+        imageAlt={t("altChurch")}
       />
 
       <LocationCard
         title="Del Rey Event Center"
-        city="West Valley City, Utah"
+        city={t("locCity")}
         time="5:00 PM"
         mapsUrl="https://maps.app.goo.gl/FGaVRKYWj7LACq8c9?g_st=ic"
         image="/salon.webp"
-        imageAlt="Ilustración en acuarela del salón Del Rey Event Center"
+        imageAlt={t("altVenue")}
       />
     </section>
   );

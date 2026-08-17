@@ -1,6 +1,8 @@
 "use client";
+import { useLang } from "@/lib/i18n";
 
 export default function Footer() {
+  const { t, lang, setLang } = useLang();
   return (
     <footer style={{ padding: "50px 20px", textAlign: "center" }}>
       <div style={{
@@ -28,7 +30,7 @@ export default function Footer() {
         color: "#6d2c86",
         marginTop: 6,
       }}>
-        III · Octubre · MMXXVI
+        {t("footerDate")}
       </div>
       <div style={{
         width: 48,
@@ -44,7 +46,7 @@ export default function Footer() {
         color: "rgba(31,22,32,0.68)",
         letterSpacing: 1,
       }}>
-        Con mucho cariño por{" "}
+        {lang === "en" ? "Made with love by" : "Con mucho cariño por"}{" "}
         <a
           href="https://www.instagram.com/elysium.invitaciones"
           target="_blank"
@@ -54,6 +56,46 @@ export default function Footer() {
           @elysium.invitaciones
         </a>
       </p>
+
+      {/* Toggle de idioma */}
+      <div
+        role="group"
+        aria-label={t("langToggleAria")}
+        style={{
+          display: "inline-flex",
+          marginTop: 22,
+          borderRadius: 30,
+          overflow: "hidden",
+          border: "1px solid rgba(209,157,1,0.55)",
+          background: "rgba(255,255,255,0.72)",
+        }}
+      >
+        {(["es", "en"] as const).map((l) => (
+          <button
+            key={l}
+            type="button"
+            onClick={() => setLang(l)}
+            aria-pressed={lang === l}
+            aria-label={l === "es" ? "Ver la invitación en español" : "View the invitation in English"}
+            style={{
+              minWidth: 62,
+              minHeight: 44,
+              padding: "10px 18px",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "var(--font-lato), sans-serif",
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: 2,
+              color: lang === l ? "#FFFFFF" : "#5a2170",
+              background: lang === l ? "linear-gradient(135deg,#8b3fa6,#5a2170)" : "transparent",
+              transition: "background .25s, color .25s",
+            }}
+          >
+            {l.toUpperCase()}
+          </button>
+        ))}
+      </div>
     </footer>
   );
 }

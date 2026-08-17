@@ -1,6 +1,8 @@
 "use client";
+import { useT } from "@/lib/i18n";
 
 export default function DressCode() {
+  const t = useT();
   return (
     <section style={{ padding: "64px 26px" }}>
       <div style={{
@@ -43,7 +45,7 @@ export default function DressCode() {
           position: "relative",
           opacity: 0.85,
         }}>
-          Etiqueta
+          {t("dressKicker")}
         </p>
         <h2 className="gold-shine" style={{
           fontFamily: "var(--font-great-vibes), cursive",
@@ -53,7 +55,7 @@ export default function DressCode() {
           marginBottom: 6,
           position: "relative",
         }}>
-          Dress Code
+          {t("dressTitle")}
         </h2>
         <p style={{
           fontFamily: "var(--font-cormorant), serif",
@@ -68,7 +70,7 @@ export default function DressCode() {
           position: "relative",
           opacity: 0.92,
         }}>
-          Formal
+          {t("dressFormal")}
         </p>
 
         {/* Barra de paleta */}
@@ -99,14 +101,14 @@ export default function DressCode() {
           maxWidth: 320,
           position: "relative",
         }}>
-          Te pedimos con cariño reservar el lila <span style={{ whiteSpace: "nowrap" }}>(#e292fe)</span> y el dorado <span style={{ whiteSpace: "nowrap" }}>(#d19d01)</span> para la quinceañera.
+          {t("dressNote1")} <span style={{ whiteSpace: "nowrap" }}>(#e292fe)</span> {t("dressNote2")} <span style={{ whiteSpace: "nowrap" }}>(#d19d01)</span> {t("dressNote3")}
         </p>
 
         {/* Caballeros / Damas */}
         <div style={{ display: "flex", justifyContent: "center", gap: 24, marginTop: 30 }}>
           <div style={{ textAlign: "center" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/imagenes/caballero.png" alt="Caballero, traje formal" width={74} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 74 }} />
+            <img src="/imagenes/caballero.png" alt={t("altMen")} width={74} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 74 }} />
             <div style={{
               fontFamily: "var(--font-cormorant), serif",
               fontStyle: "italic",
@@ -116,11 +118,11 @@ export default function DressCode() {
               textTransform: "uppercase",
               color: "#5a2170",
               marginTop: 8,
-            }}>Caballeros</div>
+            }}>{t("dressMen")}</div>
           </div>
           <div style={{ textAlign: "center" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/imagenes/dama.png" alt="Dama, vestido formal" width={62} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 62 }} />
+            <img src="/imagenes/dama.png" alt={t("altWomen")} width={62} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 62 }} />
             <div style={{
               fontFamily: "var(--font-cormorant), serif",
               fontStyle: "italic",
@@ -130,7 +132,7 @@ export default function DressCode() {
               textTransform: "uppercase",
               color: "#5a2170",
               marginTop: 8,
-            }}>Damas</div>
+            }}>{t("dressWomen")}</div>
           </div>
         </div>
       </div>

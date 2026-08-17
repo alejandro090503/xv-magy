@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
+import { useLang, type TKey } from "@/lib/i18n";
 
 const PANEL_API = "https://panel-invitados.vercel.app/api/confirmar";
 const RSVP_URL  = "xv-magy";
@@ -10,6 +11,7 @@ const RSVP_DEADLINE = new Date(2026, 9, 3, 11, 0, 0, 0);
 type Choice = "yes" | "no" | "";
 
 export default function RSVPSection() {
+  const { t } = useLang();
   const searchParams = useSearchParams();
   const [pases, setPases]     = useState(1);
   const [para, setPara]       = useState<string | null>(null);
@@ -18,7 +20,7 @@ export default function RSVPSection() {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ msg: string; color: string } | null>(null);
   const [frozen, setFrozen]   = useState(false);
-  const [btnText, setBtnText] = useState("Confirmar");
+  const [btnKey, setBtnKey] = useState<TKey>("rsvpSubmit");
 
   /* Parse query params + check deadline */
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function RSVPSection() {
 
   async function postConfirm(estado: "confirmado" | "declino", nombresArr: string[]) {
     setLoading(true);
-    setBtnText("Enviando…");
+    setBtnKey("rsvpSending");
     setFeedback(null);
     try {
       const r = await fetch(PANEL_API, {
@@ -84,33 +86,28 @@ export default function RSVPSection() {
       });
       const d = await r.json();
       if (d?.ok) {
-        setBtnText(estado === "confirmado" ? "¡Confirmado! ✦" : "Respuesta enviada ✦");
-        setFb(
-          estado === "confirmado"
-            ? "¡Gracias por confirmar! Si cambias de opinión puedes actualizar tu respuesta cuando quieras."
-            : "Gracias por avisarnos. Si cambias de opinión puedes actualizar tu respuesta cuando quieras.",
-          "#5a2170"
-        );
-        setTimeout(() => setBtnText("Actualizar respuesta"), 2400);
+        setBtnKey(estado === "confirmado" ? "rsvpConfirmed" : "rsvpSent");
+        setFb(t(estado === "confirmado" ? "rsvpThanksYes" : "rsvpThanksNo"), "#5a2170");
+        setTimeout(() => setBtnKey("rsvpUpdate"), 2400);
       } else {
-        setBtnText("Confirmar");
-        setFb("Hubo un problema al enviar. Intenta de nuevo.", "#b91c1c");
+        setBtnKey("rsvpSubmit");
+        setFb(t("rsvpErrSend"), "#b91c1c");
       }
     } catch {
-      setBtnText("Confirmar");
-      setFb("Sin conexión. Verifica tu internet e intenta de nuevo.", "#b91c1c");
+      setBtnKey("rsvpSubmit");
+      setFb(t("rsvpErrNet"), "#b91c1c");
     } finally {
       setLoading(false);
     }
   }
 
   const handleConfirm = () => {
-    if (frozen) { setFb("El plazo para confirmar ya cerró.", "#b91c1c"); return; }
-    if (!choice) { setFb("Selecciona si asistirás o no.", "#b91c1c"); return; }
+    if (frozen) { setFb(t("rsvpClosedShort"), "#b91c1c"); return; }
+    if (!choice) { setFb(t("rsvpPickOne"), "#b91c1c"); return; }
     if (choice === "no") { postConfirm("declino", []); return; }
     const filled = names.map(n => n.trim()).filter(n => n);
     if (filled.length === 0) {
-      setFb("Por favor escribe al menos un nombre.", "#b91c1c");
+      setFb(t("rsvpAtLeastOne"), "#b91c1c");
       return;
     }
     postConfirm("confirmado", filled);
@@ -153,7 +150,7 @@ export default function RSVPSection() {
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        Confirmación
+        {t("rsvpTitle")}
       </h2>
 
       <div style={{
@@ -189,8 +186,8 @@ export default function RSVPSection() {
             color: "#5a2170",
             textAlign: "center",
           }}>
-            ✦ El plazo para confirmar ya cerró.<br />
-            Si necesitas ajustar tu respuesta, por favor contacta directamente.
+            {t("rsvpClosed")}<br />
+            {t("rsvpClosedNote")}
           </div>
         )}
 
@@ -205,7 +202,7 @@ export default function RSVPSection() {
           fontStyle: "italic", fontSize: 15, letterSpacing: 2,
           textAlign: "center",
         }}>
-          {pases === 1 ? "1 pase disponible" : `${pases} pases disponibles`}
+          {pases === 1 ? t("passAvailOne") : `${pases} ${t("passAvailMany")}`}
         </div>
 
         {/* Fecha límite */}
@@ -215,7 +212,7 @@ export default function RSVPSection() {
           fontStyle: "italic", fontWeight: 500, fontSize: 15,
           color: "#6d2c86", letterSpacing: 2, marginBottom: 18,
         }}>
-          Favor de confirmar tu asistencia a la brevedad
+          {t("rsvpSub")}
         </p>
 
         {/* Toggle Sí/No asistiré */}
@@ -226,7 +223,7 @@ export default function RSVPSection() {
             onClick={() => { setChoice("yes"); setFeedback(null); }}
             style={toggleBtnStyle(choice === "yes", true)}
           >
-            Sí asistiré
+            {t("rsvpYes")}
           </button>
           <button
             type="button"
@@ -234,7 +231,7 @@ export default function RSVPSection() {
             onClick={() => { setChoice("no"); setFeedback(null); }}
             style={toggleBtnStyle(choice === "no", false)}
           >
-            No asistiré
+            {t("rsvpNo")}
           </button>
         </div>
 
@@ -258,7 +255,7 @@ export default function RSVPSection() {
                 <input
                   type="text"
                   disabled={frozen}
-                  placeholder={i === 0 ? "Tu nombre completo" : `Nombre acompañante ${i + 1}`}
+                  placeholder={i === 0 ? t("rsvpNamePlaceholder") : `${t("rsvpCompanion")} ${i + 1}`}
                   value={names[i] ?? ""}
                   onChange={(e) => handleName(i, e.target.value)}
                   style={{
@@ -323,7 +320,7 @@ export default function RSVPSection() {
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          {frozen ? "Plazo cerrado" : btnText}
+          {frozen ? t("rsvpClosedBtn") : t(btnKey)}
         </button>
       </div>
     </section>

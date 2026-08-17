@@ -16,11 +16,18 @@ import Footer from "./Footer";
 import MusicFab, { type MusicFabHandle } from "./MusicFab";
 import ScrollReveal from "./ScrollReveal";
 import FondosScroll from "./FondosScroll";
+import LanguageGate from "./LanguageGate";
+import { useLang, useT } from "@/lib/i18n";
 
 export default function InvitacionClient() {
   const [contentVisible, setContentVisible] = useState(false);
   const [splashMounted, setSplashMounted] = useState(true);
   const musicRef = useRef<MusicFabHandle>(null);
+  const { chosen, hydrated } = useLang();
+  const t = useT();
+
+  // Antes que nada: elección de idioma (salvo que ya esté guardada)
+  const needsLang = hydrated && chosen === null;
 
   // Gesto del usuario: desbloquea el autoplay del audio
   const handleUnlock = () => {
@@ -40,6 +47,9 @@ export default function InvitacionClient() {
     <>
       {/* FONDOS TEMÁTICOS QUE CAMBIAN AL SCROLLEAR */}
       <FondosScroll />
+
+      {/* SELECTOR DE IDIOMA — primera pantalla */}
+      {needsLang && <LanguageGate />}
 
       {/* SPLASH */}
       {splashMounted && <IntroSequence onUnlock={handleUnlock} onFinish={handleFinish} />}
@@ -85,7 +95,7 @@ export default function InvitacionClient() {
             letterSpacing: 0.5,
             color: "#5a2170",
           }}>
-            Hoy comienza una nueva etapa llena de sueños, ilusiones y momentos que guardaré por siempre en mi corazón. Quiero compartir contigo la emoción, la magia y la alegría de esta noche tan especial.
+            {t("phrase")}
           </p>
         </ScrollReveal>
 
@@ -113,7 +123,7 @@ export default function InvitacionClient() {
                 color: "#5a2170",
                 textIndent: 8,
               }}>
-                3 · Octubre · 2026
+                {t("dateBanner")}
               </div>
               <div style={{ flex: 1, maxWidth: 60, height: 1, background: "linear-gradient(to left,transparent,#8b3fa6)", opacity: 0.5 }} />
             </div>
@@ -186,7 +196,7 @@ export default function InvitacionClient() {
                 lineHeight: 1.6,
                 margin: 0,
               }}>
-                Con cariño, este evento está pensado para nuestros invitados adultos.
+                {t("adultsOnly")}
               </p>
             </div>
           </section>

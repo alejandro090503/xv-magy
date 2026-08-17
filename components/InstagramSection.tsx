@@ -1,4 +1,5 @@
 "use client";
+import { useLang } from "@/lib/i18n";
 
 /* ══════════════════════════════════════════════════════════════════
    PENDIENTE: reemplazar por el link real del álbum de Google Drive
@@ -8,6 +9,7 @@
 const URL_ALBUM = "https://xv-magy.vercel.app";
 
 export default function InstagramSection() {
+  const { t, lang } = useLang();
   return (
     <section style={{ padding: "64px 26px" }}>
       <p style={{
@@ -22,7 +24,7 @@ export default function InstagramSection() {
         marginBottom: 8,
         opacity: 0.9,
       }}>
-        Comparte el momento
+        {t("albumKicker")}
       </p>
       <h2 style={{
         fontFamily: "var(--font-great-vibes), cursive",
@@ -35,7 +37,7 @@ export default function InstagramSection() {
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        Álbum Compartido
+        {t("albumTitle")}
       </h2>
 
       <div style={{
@@ -69,7 +71,7 @@ export default function InstagramSection() {
             maxWidth: 320,
             margin: "0 auto 24px",
           }}>
-            Escanea el código y comparte los mejores momentos de la fiesta en el álbum.
+            {t("albumText")}
           </p>
 
           {/* Caja del QR con marco dorado */}
@@ -106,7 +108,7 @@ export default function InstagramSection() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/imagenes/qr-album.png"
-              alt="Código QR del álbum compartido — escanea para entrar"
+              alt={t("altQr")}
               width={220}
               height={220}
               style={{ display: "block", borderRadius: 8, width: 220, height: 220 }}
@@ -135,7 +137,7 @@ export default function InstagramSection() {
               }}
               className="gold-btn"
             >
-              Abrir el álbum
+              {t("albumButton")}
             </a>
           </div>
 
@@ -148,7 +150,7 @@ export default function InstagramSection() {
             lineHeight: 1.55,
             marginBottom: 0,
           }}>
-            Cada foto que captures hará este día aún más especial.
+            {t("albumFoot")}
           </p>
 
           <div style={{
@@ -165,7 +167,7 @@ export default function InstagramSection() {
             letterSpacing: 1,
             fontStyle: "italic",
           }}>
-            Con mucho cariño por{" "}
+            {lang === "en" ? "Made with love by" : "Con mucho cariño por"}{" "}
             <a
               href="https://www.instagram.com/elysium.invitaciones"
               target="_blank"

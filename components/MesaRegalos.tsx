@@ -1,8 +1,10 @@
 "use client";
+import { useT } from "@/lib/i18n";
 
 import { useState } from "react";
 
 export default function MesaRegalos() {
+  const t = useT();
   const [envOpen, setEnvOpen] = useState(false);
   return (
     <section style={{ padding: "64px 26px" }}>
@@ -16,7 +18,7 @@ export default function MesaRegalos() {
         overflow: "visible",
         display: "block",
       }}>
-        Mesa de Regalos
+        {t("giftsTitle")}
       </h2>
 
       {/* Frase intro */}
@@ -32,7 +34,7 @@ export default function MesaRegalos() {
         maxWidth: 360,
         margin: "0 auto 30px",
       }}>
-        Tu cariño y presencia son el mejor regalo que puedo recibir. Si deseas obsequiarme algo, estas son mis sugerencias.
+        {t("giftsIntro")}
       </p>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 18, alignItems: "center" }}>
@@ -60,7 +62,7 @@ export default function MesaRegalos() {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0 }}>
             <button
               className={`env-interactive${envOpen ? " open" : ""}`}
-              aria-label="Sobre — toca para abrir"
+              aria-label={t("envelopeAria")}
               aria-expanded={envOpen}
               onClick={() => setEnvOpen((o) => !o)}
             >
@@ -102,11 +104,11 @@ export default function MesaRegalos() {
                   <path d="M18 8 Q26 3 34 8" />
                   <rect x="20" y="28" width="12" height="2.5" rx="1.25" fill="currentColor" stroke="none" opacity=".4" />
                 </svg>
-                <p className="env-title">Lluvia de Sobres</p>
-                <p className="env-desc">Un sobre con tu bendición<br />llenará mi corazón de alegría.</p>
+                <p className="env-title">{t("envelopeTitle")}</p>
+                <p className="env-desc">{t("envelopeLine1")}<br />{t("envelopeLine2")}</p>
               </div>
             </button>
-            <p className="env-tap-hint">Toca el sobre</p>
+            <p className="env-tap-hint">{t("envelopeHint")}</p>
           </div>
         </div>
 
@@ -163,7 +165,7 @@ export default function MesaRegalos() {
             marginBottom: 6,
             lineHeight: 1.1,
           }}>
-            Obsequio de tu Elección
+            {t("giftChoiceTitle")}
           </h3>
 
           <div style={{
@@ -182,7 +184,7 @@ export default function MesaRegalos() {
             lineHeight: 1.55,
             letterSpacing: 0.4,
           }}>
-            Cualquier detalle elegido con cariño será atesorado por siempre.
+            {t("giftChoiceText")}
           </p>
         </div>
 

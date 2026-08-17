@@ -1,4 +1,5 @@
 "use client";
+import { useT } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 
 const TARGET = new Date("2026-10-03T12:00:00-06:00");
@@ -81,6 +82,7 @@ function Ring({ value, label, max, color, glowColor }: RingProps) {
 }
 
 export default function CountdownTimer() {
+  const t = useT();
   const [time, setTime] = useState(getRemainingTime());
 
   useEffect(() => {
@@ -101,7 +103,7 @@ export default function CountdownTimer() {
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        Cuenta Regresiva
+        {t("countdownTitle")}
       </h2>
 
       <div style={{
@@ -121,10 +123,10 @@ export default function CountdownTimer() {
         }} />
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "8px", maxWidth: 380, margin: "0 auto", justifyItems: "center" }}>
-          <Ring value={time.days} label="Días" max={TOTAL_DAYS} color="#8b3fa6" glowColor="#8b3fa6" />
-          <Ring value={time.hours} label="Horas" max={24} color="#d9a6f0" glowColor="#d9a6f0" />
-          <Ring value={time.minutes} label="Minutos" max={60} color="#d19d01" glowColor="#d19d01" />
-          <Ring value={time.seconds} label="Segundos" max={60} color="#e4c2f5" glowColor="#e4c2f5" />
+          <Ring value={time.days} label={t("days")} max={TOTAL_DAYS} color="#8b3fa6" glowColor="#8b3fa6" />
+          <Ring value={time.hours} label={t("hours")} max={24} color="#d9a6f0" glowColor="#d9a6f0" />
+          <Ring value={time.minutes} label={t("minutes")} max={60} color="#d19d01" glowColor="#d19d01" />
+          <Ring value={time.seconds} label={t("seconds")} max={60} color="#e4c2f5" glowColor="#e4c2f5" />
         </div>
 
         <div style={{ textAlign: "center", marginTop: 28, paddingTop: 20, borderTop: "1px solid rgba(139,63,166,0.10)" }}>
@@ -137,7 +139,7 @@ export default function CountdownTimer() {
             letterSpacing: 1,
             lineHeight: 1.6,
           }}>
-            Cada segundo más cerca de este día especial
+            {t("countdownSub")}
           </p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useLang, passesLabel } from "@/lib/i18n";
 
 const PARTICLES = [
   { left: "7%",  size: 4, dur: 9,  del: 0,   color: "#ffb545" },
@@ -101,6 +102,7 @@ export default function Hero() {
   const frameRef   = useRef<HTMLDivElement>(null);
   const xvRef      = useRef<HTMLDivElement>(null);
   const dateRef    = useRef<HTMLDivElement>(null);
+  const { t, lang } = useLang();
   const [persona, setPersona] = useState<{ para: string; pases: number } | null>(null);
 
   useEffect(() => {
@@ -276,13 +278,15 @@ export default function Hero() {
                 fontFamily: "var(--font-cormorant), serif",
                 fontStyle: "italic",
                 fontWeight: 500,
-                fontSize: "clamp(20px, 5.5vw, 26px)",
-                letterSpacing: 11,
+                // "QUINCEAÑERA" es mucho más largo que "AÑOS": se afloja el tracking
+                fontSize: lang === "en" ? "clamp(15px, 4vw, 19px)" : "clamp(20px, 5.5vw, 26px)",
+                letterSpacing: lang === "en" ? 4 : 11,
                 textTransform: "uppercase",
                 color: "#5a2170",
-                textIndent: 11,
+                textIndent: lang === "en" ? 4 : 11,
+                whiteSpace: "nowrap",
               }}>
-                Años
+                {t("heroYears")}
               </div>
             </div>
 
@@ -310,7 +314,7 @@ export default function Hero() {
                 color: "#5a2170",
                 background: "rgba(255,255,255,0.5)",
               }}>
-                3 · Octubre · 2026
+                {t("heroDate")}
               </span>
 
               {persona && (
@@ -324,7 +328,7 @@ export default function Hero() {
                   color: "#5a2170",
                   textAlign: "center",
                 }}>
-                  Esta invitación es para
+                  {t("heroForYou")}
                   <br />
                   <strong style={{
                     fontStyle: "normal",
@@ -339,7 +343,7 @@ export default function Hero() {
                     {persona.para}
                   </strong>
                   <br />
-                  con {persona.pases === 1 ? "1 pase" : `${persona.pases} pases`}
+                  {t("heroWith")} {passesLabel(persona.pases, lang)}
                 </p>
               )}
             </div>

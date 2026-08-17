@@ -1,13 +1,14 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { useT, type TKey } from "@/lib/i18n";
 
-const ITEMS = [
-  { time: "12:00 pm", event: "Misa", gem: 0 },
-  { time: "5:00 pm", event: "Comida / Recepción", gem: 1 },
-  { time: "7:00 pm", event: "Vals de la Quinceañera", gem: 2 },
-  { time: "8:00 pm", event: "Inicio del Baile", gem: 0 },
-  { time: "1:00 am", event: "Fin del Evento", gem: 1 },
+const ITEMS: { time: string; key: TKey; gem: number }[] = [
+  { time: "12:00 pm", key: "itMass", gem: 0 },
+  { time: "5:00 pm", key: "itDinner", gem: 1 },
+  { time: "7:00 pm", key: "itWaltz", gem: 2 },
+  { time: "8:00 pm", key: "itDance", gem: 0 },
+  { time: "1:00 am", key: "itEnd", gem: 1 },
 ];
 
 const GEM_COLORS = [
@@ -150,6 +151,7 @@ function ItinerarioItem({
 }
 
 export default function Itinerario() {
+  const t = useT();
   const trackRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -165,7 +167,7 @@ export default function Itinerario() {
         WebkitTextFillColor: "transparent",
         backgroundClip: "text",
       }}>
-        Itinerario
+        {t("itinTitle")}
       </h2>
 
       <div
@@ -190,7 +192,7 @@ export default function Itinerario() {
           <ItinerarioItem
             key={i}
             time={item.time}
-            event={item.event}
+            event={t(item.key)}
             gemIdx={item.gem}
             delay={0}
           />

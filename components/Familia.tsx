@@ -1,4 +1,5 @@
 "use client";
+import { useT } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 
 const CORTEJO = [
@@ -107,6 +108,7 @@ function CortejoRotativo() {
 }
 
 export default function Familia() {
+  const t = useT();
   return (
     <section style={{ padding: "64px 26px" }}>
       <p style={{
@@ -121,7 +123,7 @@ export default function Familia() {
         marginBottom: 8,
         opacity: 0.95,
       }}>
-        Acompañada de
+        {t("familyKicker")}
       </p>
       <h2 style={{
         fontFamily: "var(--font-great-vibes), cursive",
@@ -137,7 +139,7 @@ export default function Familia() {
         overflow: "visible",
         display: "block",
       }}>
-        Mi Familia
+        {t("familyTitle")}
       </h2>
 
       {/* Cortejo de Honor */}
@@ -180,7 +182,7 @@ export default function Familia() {
           marginBottom: 18,
           opacity: 1,
         }}>
-          Cortejo de Honor
+          {t("courtTitle")}
         </p>
 
         <CortejoRotativo />
