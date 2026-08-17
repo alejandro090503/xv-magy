@@ -28,10 +28,18 @@ export const metadata: Metadata = {
   title: "Magy · Mis XV Años · 3 Octubre 2026",
   description:
     "Invitación digital a los XV Años de Magaly · 3 de Octubre de 2026 · West Valley City, UT.",
+  metadataBase: new URL("https://xv-magy.vercel.app"),
   openGraph: {
     title: "Magy · Mis XV Años",
     description: "3 de Octubre de 2026 · West Valley City, UT.",
     type: "website",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Magy · Mis XV Años" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Magy · Mis XV Años",
+    description: "3 de Octubre de 2026 · West Valley City, UT.",
+    images: ["/og-image.jpg"],
   },
 };
 

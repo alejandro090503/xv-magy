@@ -55,6 +55,7 @@ export default function CalendarioBtn() {
       </p>
       <a
         href={GCAL_URL}
+        className="gold-btn"
         target="_blank"
         rel="noopener noreferrer"
         style={{

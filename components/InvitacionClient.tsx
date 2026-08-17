@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import SplashScreen from "./SplashScreen";
+import IntroSequence from "./IntroSequence";
 import Hero from "./Hero";
 import Ornament from "./Ornament";
 import CountdownTimer from "./CountdownTimer";
@@ -22,16 +22,18 @@ export default function InvitacionClient() {
   const [splashMounted, setSplashMounted] = useState(true);
   const musicRef = useRef<MusicFabHandle>(null);
 
-  const handleOpen = () => {
-    // Iniciar música AQUÍ — mismo call stack que el gesto del usuario → autoplay permitido
+  // Gesto del usuario: desbloquea el autoplay del audio
+  const handleUnlock = () => {
     musicRef.current?.play();
-    // Fade-in del contenido en paralelo con el fade-out del splash
+  };
+
+  // Fin de la cinemática: crossfade del overlay a la invitación
+  const handleFinish = () => {
     setContentVisible(true);
-    // Desmontar el splash tras completarse su fade (0.75s + margen)
     setTimeout(() => {
       setSplashMounted(false);
       window.scrollTo({ top: 0, behavior: "instant" });
-    }, 820);
+    }, 1000);
   };
 
   return (
@@ -40,13 +42,13 @@ export default function InvitacionClient() {
       <FondosScroll />
 
       {/* SPLASH */}
-      {splashMounted && <SplashScreen onOpen={handleOpen} />}
+      {splashMounted && <IntroSequence onUnlock={handleUnlock} onFinish={handleFinish} />}
 
       {/* CONTENIDO PRINCIPAL */}
       <div
         style={{
           opacity: contentVisible ? 1 : 0,
-          transition: "opacity 0.85s ease",
+          transition: "opacity 0.95s ease",
           maxWidth: 430,
           margin: "0 auto",
           position: "relative",

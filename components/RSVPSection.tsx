@@ -195,7 +195,7 @@ export default function RSVPSection() {
         )}
 
         {/* Badge de pases */}
-        <div style={{
+        <div className="gold-btn" style={{
           display: "block", width: "fit-content",
           margin: "0 auto 18px",
           background: "linear-gradient(135deg,#8b3fa6,#5a2170)",
@@ -294,6 +294,7 @@ export default function RSVPSection() {
 
         {/* Botón confirmar */}
         <button
+          className={frozen ? undefined : "gold-btn"}
           onClick={handleConfirm}
           disabled={loading || frozen}
           style={{

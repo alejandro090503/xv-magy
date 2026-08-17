@@ -133,6 +133,7 @@ export default function InstagramSection() {
                 textTransform: "uppercase",
                 boxShadow: "0 6px 20px rgba(90,33,112,0.28)",
               }}
+              className="gold-btn"
             >
               Abrir el álbum
             </a>

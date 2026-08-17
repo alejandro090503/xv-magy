@@ -2,13 +2,11 @@
 
 function LocationCard({
   title,
-  venue,
   city,
   time,
   mapsUrl,
 }: {
   title: string;
-  venue: string;
   city: string;
   time: string;
   mapsUrl: string;
@@ -57,7 +55,7 @@ function LocationCard({
 
         <div style={{
           fontFamily: "var(--font-great-vibes), cursive",
-          fontSize: 42,
+          fontSize: "clamp(30px, 8.2vw, 38px)",
           background: "linear-gradient(135deg,#1f1620 20%,#8b3fa6)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
@@ -68,17 +66,6 @@ function LocationCard({
           {title}
         </div>
 
-        <div style={{
-          fontFamily: "var(--font-cormorant), serif",
-          fontWeight: 700,
-          fontSize: 24,
-          color: "#1f1620",
-          letterSpacing: 1,
-          lineHeight: 1.3,
-          marginBottom: 8,
-        }}>
-          {venue}
-        </div>
 
         <div style={{
           fontFamily: "var(--font-cormorant), serif",
@@ -116,6 +103,7 @@ function LocationCard({
       <div style={{ textAlign: "center", padding: "0 22px 30px" }}>
         <a
           href={mapsUrl}
+          className="gold-btn"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -172,18 +160,15 @@ export default function Ubicacion() {
         Ubicación
       </h2>
 
-      {/* PENDIENTE: nombre exacto del recinto — cliente solo mandó el link de Google Maps */}
       <LocationCard
-        title="Misa"
-        venue="Iglesia — ver mapa"
+        title="St. Martin de Porres Catholic Church"
         city="West Valley City, Utah"
         time="12:00 PM"
         mapsUrl="https://maps.app.goo.gl/Basx8tHwjSJSwvTm9?g_st=ic"
       />
 
       <LocationCard
-        title="Recepción"
-        venue="Salón de eventos — ver mapa"
+        title="Del Rey Event Center"
         city="West Valley City, Utah"
         time="5:00 PM"
         mapsUrl="https://maps.app.goo.gl/FGaVRKYWj7LACq8c9?g_st=ic"
