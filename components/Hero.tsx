@@ -101,7 +101,6 @@ export default function Hero() {
   const frameRef   = useRef<HTMLDivElement>(null);
   const xvRef      = useRef<HTMLDivElement>(null);
   const dateRef    = useRef<HTMLDivElement>(null);
-  const messageRef = useRef<HTMLParagraphElement>(null);
   const [persona, setPersona] = useState<{ para: string; pases: number } | null>(null);
 
   useEffect(() => {
@@ -115,7 +114,6 @@ export default function Hero() {
 
   useEffect(() => {
     const schedule = [
-      { el: messageRef, delay: 180,  styles: { opacity: "1", transform: "translateY(0)" } },
       { el: nameRef,    delay: 480,  styles: { opacity: "1", transform: "translateY(0) scale(1)" } },
       { el: frameRef,   delay: 820,  styles: { opacity: "1", transform: "scaleY(1)" } },
       { el: xvRef,      delay: 1100, styles: { opacity: "1", transform: "translateY(0)" } },
@@ -142,6 +140,17 @@ export default function Hero() {
         padding: "62px 0 48px",
       }}
     >
+      {/* Fondo dedicado del hero: linternas flotantes (asset propio, fijo).
+          A partir de aquí la página usa los fondos rotativos por scroll. */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "url('/fondo-hero.jpg') center center / cover no-repeat",
+        opacity: 0.55,
+        pointerEvents: "none",
+        maskImage: "radial-gradient(ellipse 92% 82% at 50% 50%, #000 55%, transparent 100%)",
+        WebkitMaskImage: "radial-gradient(ellipse 92% 82% at 50% 50%, #000 55%, transparent 100%)",
+      }} />
+
       {/* Glow radial central */}
       <div style={{
         position: "absolute", inset: 0,
@@ -168,29 +177,6 @@ export default function Hero() {
           pointerEvents: "none",
         }} />
       ))}
-
-      {/* ══════════ MENSAJE — ahora arriba del nombre ══════════ */}
-      <p
-        ref={messageRef}
-        style={{
-          maxWidth: 360,
-          padding: "0 28px 24px",
-          margin: 0,
-          textAlign: "center",
-          fontFamily: "var(--font-cormorant), serif",
-          fontStyle: "italic",
-          fontWeight: 500,
-          fontSize: 18,
-          lineHeight: 1.72,
-          letterSpacing: 0.5,
-          color: "#5a2170",
-          opacity: 0,
-          transform: "translateY(14px)",
-          transition: "opacity 0.95s ease, transform 0.95s ease",
-        }}
-      >
-        Hoy comienza una nueva etapa llena de sueños, ilusiones y momentos que guardaré por siempre en mi corazón. Quiero compartir contigo la emoción, la magia y la alegría de esta noche tan especial.
-      </p>
 
       {/* ══════════ NOMBRE — fuera del frame ══════════ */}
       <div style={{
@@ -272,17 +258,13 @@ export default function Hero() {
                 transition: "opacity 0.9s ease, transform 0.9s ease",
               }}
             >
-              <div style={{
+              <div className="gold-shine gold-shine-hero" style={{
                 fontFamily: "var(--font-cormorant), serif",
                 fontWeight: 700,
                 fontSize: "clamp(64px, 18vw, 86px)",
                 letterSpacing: 22,
                 lineHeight: 1,
                 textIndent: 22,
-                background: "linear-gradient(135deg, #a67c01 0%, #d19d01 50%, #a67c01 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
               }}>
                 XV
               </div>

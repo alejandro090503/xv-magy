@@ -64,8 +64,27 @@ export default function InvitacionClient() {
           backgroundPosition: "0 0, 50px 50px",
         }}
       >
-        {/* HERO */}
+        {/* HERO — con su asset de fondo propio */}
         <Hero />
+
+        {/* FRASE — fuera del hero; a partir de aquí mandan los fondos por scroll */}
+        <ScrollReveal>
+          <p style={{
+            maxWidth: 360,
+            margin: "0 auto",
+            padding: "36px 28px 8px",
+            textAlign: "center",
+            fontFamily: "var(--font-cormorant), serif",
+            fontStyle: "italic",
+            fontWeight: 500,
+            fontSize: 18,
+            lineHeight: 1.72,
+            letterSpacing: 0.5,
+            color: "#5a2170",
+          }}>
+            Hoy comienza una nueva etapa llena de sueños, ilusiones y momentos que guardaré por siempre en mi corazón. Quiero compartir contigo la emoción, la magia y la alegría de esta noche tan especial.
+          </p>
+        </ScrollReveal>
 
         {/* FAMILIA — justo después del header */}
         <ScrollReveal>

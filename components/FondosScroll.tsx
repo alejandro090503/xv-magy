@@ -40,8 +40,14 @@ export default function FondosScroll() {
 
     const pintar = () => {
       const doc = document.documentElement;
-      const alcance = doc.scrollHeight - window.innerHeight;
-      const p = alcance > 0 ? Math.min(1, Math.max(0, window.scrollY / alcance)) : 0;
+      // El hero ocupa el primer viewport y lleva su propio asset dedicado,
+      // así que la rotación de fondos empieza justo cuando el hero sale.
+      const inicio = window.innerHeight;
+      const alcance = doc.scrollHeight - window.innerHeight - inicio;
+      const p =
+        alcance > 0
+          ? Math.min(1, Math.max(0, (window.scrollY - inicio) / alcance))
+          : 0;
 
       // posición del "cursor" sobre las N capas: 0 → capa 0, N-1 → última
       const pos = p * (N - 1);

@@ -10,7 +10,7 @@ export default function DressCode() {
         borderRadius: 28,
         padding: "36px 24px 32px",
         border: "1px solid rgba(166,124,1,0.30)",
-        boxShadow: "0 18px 60px rgba(139,63,166,0.18), inset 0 1px 0 rgba(255,255,255,0.9)",
+        boxShadow: "0 18px 60px rgba(90,33,112,0.18), inset 0 1px 0 rgba(255,255,255,0.9)",
       }}>
         {/* Luces de fondo suaves */}
         <div style={{
@@ -45,18 +45,13 @@ export default function DressCode() {
         }}>
           Etiqueta
         </p>
-        <h2 style={{
+        <h2 className="gold-shine" style={{
           fontFamily: "var(--font-great-vibes), cursive",
           fontSize: 50,
           textAlign: "center",
           lineHeight: 1.1,
           marginBottom: 6,
           position: "relative",
-          background: "linear-gradient(135deg,#5a2170 0%,#8b3fa6 45%,#d19d01 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          filter: "drop-shadow(0 2px 14px rgba(139,63,166,0.25))",
         }}>
           Dress Code
         </h2>
@@ -73,7 +68,7 @@ export default function DressCode() {
           position: "relative",
           opacity: 0.92,
         }}>
-          Formal — detalles por confirmar
+          Formal
         </p>
 
         {/* Barra de paleta */}
@@ -86,67 +81,56 @@ export default function DressCode() {
           boxShadow: "0 2px 10px rgba(90,33,112,0.20)",
           position: "relative",
         }}>
-          {["#e4c2f5", "#d19d01", "#d9a6f0", "#ffffff"].map((c, i) => (
+          {["#5a2170", "#d19d01", "#8b3fa6", "#efcaff"].map((c, i) => (
             <div key={i} style={{ flex: 1, background: c }} />
           ))}
         </div>
 
-        {/* Nota de colores a evitar */}
-        <div style={{
-          position: "relative",
+        {/* Nota de colores reservados */}
+        <p style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontStyle: "italic",
+          fontWeight: 600,
+          fontSize: 15,
+          lineHeight: 1.6,
+          color: "#5a2170",
           textAlign: "center",
-          padding: "16px 18px",
-          border: "1px solid rgba(139,63,166,0.30)",
-          borderRadius: 14,
-          background: "rgba(255,255,255,0.55)",
-          marginTop: 8,
+          margin: "0 auto 4px",
+          maxWidth: 320,
+          position: "relative",
         }}>
-          <div style={{
-            position: "absolute",
-            top: -11,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 22,
-            height: 22,
-            borderRadius: "50%",
-            background: "#fbf7ff",
-            border: "1.5px solid rgba(139,63,166,0.45)",
-            fontSize: 11,
-            lineHeight: "20px",
-            textAlign: "center",
-            color: "#5a2170",
-            fontWeight: 700,
-          }}>
-            ✕
+          Te pedimos con cariño reservar el lila <span style={{ whiteSpace: "nowrap" }}>(#e292fe)</span> y el dorado <span style={{ whiteSpace: "nowrap" }}>(#d19d01)</span> para la quinceañera.
+        </p>
+
+        {/* Caballeros / Damas */}
+        <div style={{ display: "flex", justifyContent: "center", gap: 24, marginTop: 30 }}>
+          <div style={{ textAlign: "center" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/imagenes/caballero.png" alt="Caballero, traje formal" width={74} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 74 }} />
+            <div style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontStyle: "italic",
+              fontWeight: 600,
+              fontSize: 15,
+              letterSpacing: 3,
+              textTransform: "uppercase",
+              color: "#5a2170",
+              marginTop: 8,
+            }}>Caballeros</div>
           </div>
-          <p style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: 17,
-            fontStyle: "italic",
-            fontWeight: 600,
-            color: "#5a2170",
-            letterSpacing: 0.5,
-            lineHeight: 1.55,
-          }}>
-            Por favor evitar los colores lila/morado y dorado/mostaza — son los colores del evento
-          </p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 10 }}>
+          <div style={{ textAlign: "center" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/imagenes/dama.png" alt="Dama, vestido formal" width={62} height={150} style={{ display: "block", margin: "0 auto", height: 150, width: 62 }} />
             <div style={{
-              width: 30,
-              height: 30,
-              borderRadius: "50%",
-              background: "#efcaff",
-              border: "2px solid rgba(255,255,255,0.95)",
-              boxShadow: "0 2px 8px rgba(139,63,166,0.25)",
-            }} />
-            <div style={{
-              width: 30,
-              height: 30,
-              borderRadius: "50%",
-              background: "#d19d01",
-              border: "2px solid rgba(255,255,255,0.95)",
-              boxShadow: "0 2px 8px rgba(139,63,166,0.25)",
-            }} />
+              fontFamily: "var(--font-cormorant), serif",
+              fontStyle: "italic",
+              fontWeight: 600,
+              fontSize: 15,
+              letterSpacing: 3,
+              textTransform: "uppercase",
+              color: "#5a2170",
+              marginTop: 8,
+            }}>Damas</div>
           </div>
         </div>
       </div>
