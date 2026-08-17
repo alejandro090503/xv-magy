@@ -16,6 +16,7 @@ import Footer from "./Footer";
 import MusicFab, { type MusicFabHandle } from "./MusicFab";
 import ScrollReveal from "./ScrollReveal";
 import FondosScroll from "./FondosScroll";
+import AutoScroll from "./AutoScroll";
 import LanguageGate from "./LanguageGate";
 import { useLang, useT } from "@/lib/i18n";
 
@@ -228,6 +229,9 @@ export default function InvitacionClient() {
           <Footer />
         </ScrollReveal>
       </div>
+
+      {/* AUTO-SCROLL LENTO — sólo cuando la intro terminó */}
+      <AutoScroll active={contentVisible && !splashMounted} />
 
       {/* FAB MÚSICA */}
       <MusicFab ref={musicRef} />
