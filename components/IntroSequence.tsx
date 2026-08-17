@@ -134,6 +134,9 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
     height: "100%",
     objectFit: "cover",
     objectPosition: "center",
+    // Los <video> van después del sobre en el DOM y lo cubren por completo:
+    // sin esto capturan el tap aunque tengan opacity 0.
+    pointerEvents: "none",
   };
 
   return (
@@ -170,21 +173,32 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
 
         {/* Botón levitante */}
         {!tapped && (
+          <div style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: "9%",
+            display: "flex",
+            justifyContent: "center",
+            pointerEvents: "none",
+          }}>
           <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handleTap(); }}
+            aria-label="Toca para abrir la invitación"
             style={{
-              position: "absolute",
-              left: "50%",
-              bottom: "9%",
-              transform: "translateX(-50%)",
+              position: "relative",
+              pointerEvents: "auto",
+              minHeight: 52,
+              touchAction: "manipulation",
               fontFamily: "var(--font-cormorant), serif",
               fontSize: 13,
               letterSpacing: 8,
-              textIndent: 8,
               textTransform: "uppercase",
               fontWeight: 700,
               color: "#4a1a5e",
               whiteSpace: "nowrap",
-              padding: "15px 44px",
+              padding: "15px 40px 15px 48px",
               background: "rgba(251,247,255,0.80)",
               border: "1.5px solid rgba(209,157,1,0.62)",
               borderRadius: 40,
@@ -197,6 +211,7 @@ export default function IntroSequence({ onUnlock, onFinish }: Props) {
           >
             Toca para abrir
           </button>
+          </div>
         )}
       </div>
 

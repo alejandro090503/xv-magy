@@ -5,11 +5,15 @@ function LocationCard({
   city,
   time,
   mapsUrl,
+  image,
+  imageAlt,
 }: {
   title: string;
   city: string;
   time: string;
   mapsUrl: string;
+  image: string;
+  imageAlt: string;
 }) {
   return (
     <div style={{
@@ -34,7 +38,52 @@ function LocationCard({
         opacity: 0.52,
       }} />
 
-      <div style={{ padding: "34px 28px 0", textAlign: "center" }}>
+      {/* Acuarela del recinto */}
+      <div style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "1419 / 736",
+        overflow: "hidden",
+        background: "linear-gradient(160deg,#fbf7ff,#f6eefc)",
+      }}>
+        <img
+          src={image}
+          alt={imageAlt}
+          width={900}
+          height={466}
+          decoding="async"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            WebkitMaskImage:
+              "radial-gradient(120% 130% at 50% 42%, #000 62%, transparent 100%)",
+            maskImage:
+              "radial-gradient(120% 130% at 50% 42%, #000 62%, transparent 100%)",
+          }}
+        />
+        {/* Velo inferior para fundir la acuarela con la tarjeta */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          background:
+            "linear-gradient(to bottom,rgba(255,255,255,0.10) 0%,rgba(255,255,255,0) 45%,rgba(255,255,255,0.85) 92%,rgba(255,255,255,0.97) 100%)",
+        }} />
+        {/* Filete dorado sutil */}
+        <div style={{
+          position: "absolute",
+          left: "12%",
+          right: "12%",
+          bottom: 0,
+          height: 1,
+          background: "linear-gradient(90deg,transparent,#d19d01,transparent)",
+          opacity: 0.45,
+        }} />
+      </div>
+
+      <div style={{ padding: "26px 28px 0", textAlign: "center" }}>
         {/* Ícono PIN */}
         <div style={{
           width: 56,
@@ -165,6 +214,8 @@ export default function Ubicacion() {
         city="West Valley City, Utah"
         time="12:00 PM"
         mapsUrl="https://maps.app.goo.gl/Basx8tHwjSJSwvTm9?g_st=ic"
+        image="/iglesia.webp"
+        imageAlt="Ilustración en acuarela de St. Martin de Porres Catholic Church"
       />
 
       <LocationCard
@@ -172,6 +223,8 @@ export default function Ubicacion() {
         city="West Valley City, Utah"
         time="5:00 PM"
         mapsUrl="https://maps.app.goo.gl/FGaVRKYWj7LACq8c9?g_st=ic"
+        image="/salon.webp"
+        imageAlt="Ilustración en acuarela del salón Del Rey Event Center"
       />
     </section>
   );
