@@ -168,10 +168,12 @@ export const dict = {
     galHint: "Arrastra para girar",
     galAlt1: "Magaly en su sesión de XV años con su corona",
     galAlt2: "Magaly sostiene su ramo lila y dorado",
-    galAlt3: "Magaly de niña junto a la chimenea",
+    galAlt3: "Magaly de niña abrazando su muñeca de Rapunzel",
     galAlt4: "Magaly de niña con su gorrito de fiesta",
     galAlt5: "Magaly de bebé con su vestido de flores",
     galAlt6: "Magaly de niña con las manos en las mejillas",
+    galAlt7: "Magaly recién nacida, dormida entre mantas",
+    galAlt8: "Magaly de bebé con diadema de flor",
 
     /* ── Footer / música ── */
     footerDate: "III · Octubre · MMXXVI",
@@ -326,10 +328,12 @@ export const dict = {
     galHint: "Drag to spin",
     galAlt1: "Magaly at her quinceañera photo shoot wearing her crown",
     galAlt2: "Magaly holding her lilac and gold bouquet",
-    galAlt3: "Magaly as a little girl by the fireplace",
+    galAlt3: "Magaly as a little girl hugging her Rapunzel doll",
     galAlt4: "Magaly as a little girl wearing a party hat",
     galAlt5: "Magaly as a baby in her floral dress",
     galAlt6: "Magaly as a little girl with her hands on her cheeks",
+    galAlt7: "Baby Magaly asleep among blankets",
+    galAlt8: "Baby Magaly wearing a flower headband",
 
     /* ── Footer / music ── */
     footerDate: "III · October · MMXXVI",

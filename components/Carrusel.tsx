@@ -22,6 +22,8 @@ const FOTOS: { src: string; alt: TKey }[] = [
   { src: "/imagenes/magy/magy-4.jpg", alt: "galAlt4" },
   { src: "/imagenes/magy/magy-5.jpg", alt: "galAlt5" },
   { src: "/imagenes/magy/magy-6.jpg", alt: "galAlt6" },
+  { src: "/imagenes/magy/magy-7.jpg", alt: "galAlt7" },
+  { src: "/imagenes/magy/magy-8.jpg", alt: "galAlt8" },
 ];
 
 export default function Carrusel() {
