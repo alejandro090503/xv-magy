@@ -3,12 +3,11 @@
 import { useT } from "@/lib/i18n";
 
 /**
- * Cierre de la invitacion: foto de fondo a sangrado, velo oscuro para
- * sostener el texto en blanco, y el nombre en dorado resplandeciente.
- * Replica el formato pedido por la clienta (foto + texto + firma).
+ * Cierre de la invitacion: foto de fondo a sangrado + texto + firma dorada.
  *
- * El velo es un degradado mas denso arriba (donde cae el parrafo) y mas
- * ligero abajo, para que la foto se siga leyendo sin comerse el texto.
+ * Composicion: el rostro de la nina cae en el tercio superior de la foto,
+ * asi que el velo se abre arriba (para que se vea) y se cierra abajo, donde
+ * caen el parrafo y la firma. Por eso el texto va abajo y no encima de ella.
  */
 export default function Cierre() {
   const t = useT();
@@ -19,11 +18,14 @@ export default function Cierre() {
       style={{
         position: "relative",
         overflow: "hidden",
-        padding: "72px 26px 84px",
+        minHeight: 700,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: "0 26px 64px",
         isolation: "isolate",
       }}
     >
-      {/* Foto de fondo */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/imagenes/magy/magy-5.jpg"
@@ -35,12 +37,13 @@ export default function Cierre() {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          objectPosition: "center 62%",
+          /* 22% deja el rostro dentro del encuadre, no lo recorta */
+          objectPosition: "center 22%",
           zIndex: -2,
         }}
       />
 
-      {/* Velo: denso arriba (texto), mas abierto abajo (foto respira) */}
+      {/* Velo abierto arriba (rostro visible) y denso abajo (texto legible) */}
       <div
         aria-hidden
         style={{
@@ -48,7 +51,7 @@ export default function Cierre() {
           inset: 0,
           zIndex: -1,
           background:
-            "linear-gradient(180deg, rgba(38,18,48,0.88) 0%, rgba(38,18,48,0.80) 40%, rgba(46,24,58,0.74) 60%, rgba(46,24,58,0.84) 82%, rgba(46,24,58,0.86) 100%)",
+            "linear-gradient(180deg, rgba(38,18,48,0.30) 0%, rgba(38,18,48,0.26) 26%, rgba(40,20,52,0.48) 44%, rgba(44,22,56,0.80) 60%, rgba(46,24,58,0.88) 76%, rgba(46,24,58,0.90) 100%)",
         }}
       />
 
@@ -60,9 +63,9 @@ export default function Cierre() {
           fontWeight: 500,
           color: "#ffffff",
           textAlign: "center",
-          margin: "0 auto 26px",
+          margin: "0 auto 22px",
           maxWidth: 340,
-          textShadow: "0 1px 10px rgba(20,8,28,0.55)",
+          textShadow: "0 1px 12px rgba(20,8,28,0.75)",
         }}
       >
         {t("closingText")}
