@@ -32,6 +32,8 @@ TEXTOS = [
     ("Kickers lila",           (109, 44, 134), 1.0),
     ("Toca el sobre",          (92, 67, 0),   1.0),
     ("Toggle RSVP inactivo",   (101, 53, 82), 1.0),
+    ("Verde de apoyo (--green)", (59, 81, 51), 1.0),
+    ("Verde profundo",          (47, 66, 41), 1.0),
 ]
 
 

@@ -36,7 +36,7 @@ function LocationCard({
         top: "12%",
         bottom: "12%",
         width: 2.5,
-        background: "linear-gradient(to bottom,transparent,#d9a6f0 25%,#8b3fa6 55%,#e4c2f5 80%,transparent)",
+        background: "linear-gradient(to bottom,transparent,#d9a6f0 25%,#3b5133 55%,#e4c2f5 80%,transparent)",
         opacity: 0.52,
       }} />
 

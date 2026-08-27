@@ -107,7 +107,7 @@ export default function CountdownTimer() {
       </h2>
 
       <div style={{
-        background: "linear-gradient(145deg,rgba(255,255,255,0.78),rgba(255,245,249,0.92))",
+        background: "linear-gradient(145deg,rgba(255,255,255,0.78),rgba(252,249,255,0.92))",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         border: "1px solid rgba(139,63,166,0.13)",

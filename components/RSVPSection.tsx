@@ -127,7 +127,7 @@ export default function RSVPSection() {
     background: active
       ? (isYes ? "linear-gradient(135deg,rgba(139,63,166,0.14),rgba(228,194,245,0.18))"
                : "rgba(90,33,112,0.10)")
-      : "rgba(255,245,249,0.60)",
+      : "rgba(252,249,255,0.62)",
     fontFamily: "var(--font-cormorant), serif",
     fontStyle: "italic",
     fontWeight: 600,
@@ -156,7 +156,7 @@ export default function RSVPSection() {
       </h2>
 
       <div style={{
-        background: "linear-gradient(145deg,rgba(255,255,255,0.88),rgba(255,245,249,0.97))",
+        background: "linear-gradient(145deg,rgba(255,255,255,0.88),rgba(252,249,255,0.97))",
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
         border: "1px solid rgba(139,63,166,0.18)",
@@ -250,7 +250,7 @@ export default function RSVPSection() {
                     flex: 1, padding: "14px 16px", minHeight: 50,
                     border: "1.5px solid rgba(139,63,166,0.25)",
                     borderRadius: 12,
-                    background: frozen ? "rgba(241,237,231,0.7)" : "rgba(255,245,249,0.80)",
+                    background: frozen ? "rgba(241,237,231,0.7)" : "rgba(252,249,255,0.82)",
                     fontFamily: "var(--font-lato), sans-serif",
                     fontWeight: 500, fontSize: 16, color: "#1f1620",
                     outline: "none", transition: "border-color 0.3s",
@@ -270,7 +270,7 @@ export default function RSVPSection() {
                     style={{
                       flexShrink: 0, width: 34, height: 34, borderRadius: "50%",
                       border: "1px solid rgba(139,63,166,0.22)",
-                      background: "rgba(255,245,249,0.70)",
+                      background: "rgba(252,249,255,0.72)",
                       color: "#8b3fa6", fontSize: 18, lineHeight: 1,
                       cursor: frozen ? "not-allowed" : "pointer",
                       opacity: frozen ? 0.55 : 1,

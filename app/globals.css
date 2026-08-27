@@ -19,6 +19,17 @@
   --ink: #1f1620;
   --ink-soft: rgba(31,22,32,0.86);
   --hair: rgba(139,63,166,0.20);
+
+  /* Verde de apoyo — la torre, la enredadera y el bosque.
+     Salvia apagado, elegido para convivir con el lila y el dorado:
+     nunca compite con ellos ni sustituye al goldSweep.
+     --green da 5.67:1 en el peor pixel del compositado real y
+     --green-deep 10.87:1 sobre blanco: ambos valen para texto.
+     --green-soft es SOLO decorativo (1.98:1, jamas texto). */
+  --green-soft: #a8bfa0;
+  --green: #3b5133;
+  --green-deep: #2f4229;
+  --vine: rgba(59,81,51,0.34);
 }
 
 * {
@@ -185,4 +196,20 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .gold-btn, .gold-btn::after { animation: none; }
   .gold-btn::after { opacity: 0; }
+}
+
+/* ── Accesibilidad: sin movimiento ──────────────────────────
+   Las partículas del hero y los barridos dorados son decorativos;
+   con reduced-motion se apagan en vez de quedarse a medio camino. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

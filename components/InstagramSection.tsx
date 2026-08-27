@@ -41,7 +41,7 @@ export default function InstagramSection() {
       </h2>
 
       <div style={{
-        background: "linear-gradient(145deg,rgba(255,255,255,0.85),rgba(255,245,249,0.95))",
+        background: "linear-gradient(145deg,rgba(255,255,255,0.85),rgba(252,249,255,0.95))",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         borderRadius: 26,

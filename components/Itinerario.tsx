@@ -53,7 +53,8 @@ function GlowOrb({ trackRef }: { trackRef: React.RefObject<HTMLDivElement | null
       const rawProgress = (start - rect.top) / (rect.height + start - end);
       const progress = Math.max(0, Math.min(1, rawProgress));
       const maxTop = track.offsetHeight - 55;
-      orb.style.top = `${progress * maxTop}px`;
+      // transform en vez de `top`: sin reflow, va por el compositor
+      orb.style.transform = `translate3d(-50%, ${progress * maxTop}px, 0)`;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -67,16 +68,17 @@ function GlowOrb({ trackRef }: { trackRef: React.RefObject<HTMLDivElement | null
       style={{
         position: "absolute",
         left: "50%",
-        transform: "translateX(-50%)",
+        transform: "translate3d(-50%,0,0)",
         top: 0,
         width: 5,
         height: 110,
+        willChange: "transform",
         background: "linear-gradient(to bottom,transparent,rgba(217,166,240,0.65) 20%,rgba(139,63,166,0.90) 50%,rgba(228,194,245,0.65) 80%,transparent)",
         filter: "blur(3px)",
         borderRadius: 6,
         zIndex: 1,
         pointerEvents: "none",
-        transition: "top 0.05s linear",
+        transition: "transform 0.12s cubic-bezier(0.22,0.61,0.36,1)",
       }}
     />
   );
@@ -230,7 +232,8 @@ export default function Itinerario() {
           top: 0,
           bottom: 0,
           width: 1,
-          background: "linear-gradient(to bottom,transparent 0%,rgba(217,166,240,0.30) 10%,rgba(139,63,166,0.22) 45%,rgba(228,194,245,0.28) 80%,transparent 100%)",
+          /* Enredadera: el lila cede al verde a media caida y vuelve al lila */
+          background: "linear-gradient(to bottom,transparent 0%,rgba(217,166,240,0.30) 10%,rgba(59,81,51,0.34) 45%,rgba(228,194,245,0.28) 80%,transparent 100%)",
         }} />
 
         {/* Orbe animado con scroll scrub */}
