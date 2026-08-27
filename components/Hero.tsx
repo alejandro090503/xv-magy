@@ -144,10 +144,12 @@ export default function Hero() {
       <div style={{
         position: "absolute", inset: 0,
         background: "url('/fondo-hero.jpg') center center / cover no-repeat",
-        opacity: 0.55,
+        // El asset es un MARCO: la decoracion (sol, linterna, tinta, motas)
+        // vive en los bordes y el centro es blanco. Por eso va casi opaco y
+        // sin mascara radial: esa mascara desvanecia justo los bordes, que
+        // son el asset. El texto del hero cae sobre el centro blanco.
+        opacity: 0.95,
         pointerEvents: "none",
-        maskImage: "radial-gradient(ellipse 92% 82% at 50% 50%, #000 55%, transparent 100%)",
-        WebkitMaskImage: "radial-gradient(ellipse 92% 82% at 50% 50%, #000 55%, transparent 100%)",
       }} />
 
       {/* Glow radial central */}
