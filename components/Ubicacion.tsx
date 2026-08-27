@@ -214,7 +214,7 @@ export default function Ubicacion() {
 
       <LocationCard
         title="St. Martin de Porres Catholic Church"
-        city={t("locCity")}
+        city={t("locCityChurch")}
         time="12:00 PM"
         mapsUrl="https://maps.app.goo.gl/Basx8tHwjSJSwvTm9?g_st=ic"
         image="/iglesia.webp"
@@ -223,7 +223,7 @@ export default function Ubicacion() {
 
       <LocationCard
         title="Del Rey Event Center"
-        city={t("locCity")}
+        city={t("locCityVenue")}
         time="5:00 PM"
         mapsUrl="https://maps.app.goo.gl/FGaVRKYWj7LACq8c9?g_st=ic"
         image="/salon.webp"

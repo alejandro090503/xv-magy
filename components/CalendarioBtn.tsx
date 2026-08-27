@@ -3,7 +3,7 @@ import { useT } from "@/lib/i18n";
 
 const gcalUrl = (title: string, details: string) => {
   const base = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-  const location = encodeURIComponent("West Valley City, UT, USA");
+  const location = encodeURIComponent("Del Rey Event Center, 2620 Decker Lake Blvd, West Valley City, UT 84119");
   // 2026-10-03 12:00 MDT → UTC = 2026-10-03T18:00:00Z
   const dates = "20261003T180000Z/20261004T080000Z";
   return `${base}&text=${encodeURIComponent(title)}&dates=${dates}&details=${encodeURIComponent(details)}&location=${location}`;

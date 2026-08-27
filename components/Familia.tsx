@@ -8,7 +8,6 @@ const CORTEJO = [
   "Isac Aburto",
   "Alexis Bermudez",
   "Andy Camacho",
-  "Matthew Cisneros",
   "Luis Avila",
 ];
 

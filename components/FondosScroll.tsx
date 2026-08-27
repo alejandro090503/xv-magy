@@ -15,11 +15,10 @@ import { useEffect, useRef, useState } from "react";
  */
 
 const FONDOS = [
-  "01-castillo-linternas",
-  "02-cielo-lila-linternas",
-  "03-lago-linternas",
-  "04-linternas-cielo",
-  "05-palacio-linternas",
+  "01-rapunzel-torre-lila",
+  "02-castillo-trenza",
+  "03-castillo-linternas",
+  "04-rapunzel-pascal",
 ] as const;
 
 /** Id del ancla que marca el final de la seccion Ubicacion. */

@@ -40,8 +40,6 @@ export const dict = {
     heroDate: "3 · Octubre · 2026",
     heroForYou: "Esta invitación es para",
     heroWith: "con",
-    passOne: "1 pase",
-    passMany: "pases",
 
     /* ── Frase ── */
     phrase:
@@ -67,7 +65,8 @@ export const dict = {
     locKicker: "Te esperamos en",
     locTitle: "Ubicación",
     locButton: "Cómo Llegar",
-    locCity: "West Valley City, Utah",
+    locCityChurch: "Taylorsville, Utah",
+    locCityVenue: "West Valley City, Utah",
     altChurch: "Ilustración en acuarela de St. Martin de Porres Catholic Church",
     altVenue: "Ilustración en acuarela del salón Del Rey Event Center",
 
@@ -77,20 +76,23 @@ export const dict = {
     calSub: "Agrega el evento a tu calendario",
     calButton: "Añadir a Google Calendar",
     calEventTitle: "XV Años de Magy",
-    calEventDetails: "Celebración de XV Años de Magaly · West Valley City, UT.",
+    calEventDetails: "Celebración de XV Años de Magaly · Misa en Taylorsville, UT · Recepción en West Valley City, UT.",
 
     /* ── Itinerario ── */
     itinTitle: "Itinerario",
     itMass: "Misa",
     itDinner: "Comida / Recepción",
     itWaltz: "Vals de la Quinceañera",
-    itDance: "Inicio del Baile",
-    itEnd: "Fin del Evento",
+    itDance: "Baile",
+    itMassIcon: "Icono de iglesia",
+    itDinnerIcon: "Icono de cubiertos",
+    itWaltzIcon: "Icono de vals",
+    itDanceIcon: "Icono de fiesta",
 
     /* ── Dress code ── */
     dressKicker: "Etiqueta",
     dressTitle: "Dress Code",
-    dressFormal: "Formal",
+    dressFormal: "Como se sientan cómodos",
     dressNote1: "Te pedimos con cariño reservar el lila",
     dressNote2: "y el dorado",
     dressNote3: "para la quinceañera.",
@@ -151,8 +153,19 @@ export const dict = {
     rsvpCompanion: "Nombre acompañante",
     rsvpAtLeastOne: "Por favor escribe al menos un nombre.",
     rsvpClosedBtn: "Plazo cerrado",
-    passAvailOne: "1 pase disponible",
-    passAvailMany: "pases disponibles",
+    rsvpAddCompanion: "+ Agregar acompañante",
+    rsvpRemove: "Quitar acompañante",
+
+    /* ── Carrusel de fotos ── */
+    galKicker: "Mis recuerdos",
+    galTitle: "Momentos",
+    galHint: "Arrastra para girar",
+    galAlt1: "Magaly en su sesión de XV años con su corona",
+    galAlt2: "Magaly sostiene su ramo lila y dorado",
+    galAlt3: "Magaly de niña junto a la chimenea",
+    galAlt4: "Magaly de niña con su gorrito de fiesta",
+    galAlt5: "Magaly de bebé con su vestido de flores",
+    galAlt6: "Magaly de niña con las manos en las mejillas",
 
     /* ── Footer / música ── */
     footerDate: "III · Octubre · MMXXVI",
@@ -180,8 +193,6 @@ export const dict = {
     heroDate: "October · 3 · 2026",
     heroForYou: "This invitation is for",
     heroWith: "with",
-    passOne: "1 pass",
-    passMany: "passes",
 
     /* ── Phrase ── */
     phrase:
@@ -207,7 +218,8 @@ export const dict = {
     locKicker: "We'll be waiting at",
     locTitle: "Location",
     locButton: "Get Directions",
-    locCity: "West Valley City, Utah",
+    locCityChurch: "Taylorsville, Utah",
+    locCityVenue: "West Valley City, Utah",
     altChurch: "Watercolor illustration of St. Martin de Porres Catholic Church",
     altVenue: "Watercolor illustration of the Del Rey Event Center",
 
@@ -217,20 +229,23 @@ export const dict = {
     calSub: "Add the event to your calendar",
     calButton: "Add to Google Calendar",
     calEventTitle: "Magy's Quinceañera",
-    calEventDetails: "Magaly's Quinceañera celebration · West Valley City, UT.",
+    calEventDetails: "Magaly's Quinceañera celebration · Mass in Taylorsville, UT · Reception in West Valley City, UT.",
 
     /* ── Itinerary ── */
     itinTitle: "Itinerary",
     itMass: "Mass",
     itDinner: "Dinner / Reception",
     itWaltz: "Quinceañera's Waltz",
-    itDance: "Dancing Begins",
-    itEnd: "End of the Event",
+    itDance: "Dancing",
+    itMassIcon: "Church icon",
+    itDinnerIcon: "Cutlery icon",
+    itWaltzIcon: "Waltz icon",
+    itDanceIcon: "Party icon",
 
     /* ── Dress code ── */
     dressKicker: "Attire",
     dressTitle: "Dress Code",
-    dressFormal: "Formal",
+    dressFormal: "Come as you feel comfortable",
     dressNote1: "We kindly ask you to save lilac",
     dressNote2: "and gold",
     dressNote3: "for the quinceañera.",
@@ -290,8 +305,19 @@ export const dict = {
     rsvpCompanion: "Guest name",
     rsvpAtLeastOne: "Please enter at least one name.",
     rsvpClosedBtn: "RSVP closed",
-    passAvailOne: "1 pass available",
-    passAvailMany: "passes available",
+    rsvpAddCompanion: "+ Add a guest",
+    rsvpRemove: "Remove guest",
+
+    /* ── Photo carousel ── */
+    galKicker: "My memories",
+    galTitle: "Moments",
+    galHint: "Drag to spin",
+    galAlt1: "Magaly at her quinceañera photo shoot wearing her crown",
+    galAlt2: "Magaly holding her lilac and gold bouquet",
+    galAlt3: "Magaly as a little girl by the fireplace",
+    galAlt4: "Magaly as a little girl wearing a party hat",
+    galAlt5: "Magaly as a baby in her floral dress",
+    galAlt6: "Magaly as a little girl with her hands on her cheeks",
 
     /* ── Footer / music ── */
     footerDate: "III · October · MMXXVI",
@@ -362,10 +388,4 @@ export function useLang() {
 /** Atajo: solo la función de traducción */
 export function useT() {
   return useContext(LanguageContext).t;
-}
-
-/** "1 pase" / "3 pases" · "1 pass" / "3 passes" */
-export function passesLabel(n: number, lang: Lang) {
-  if (lang === "en") return n === 1 ? "1 pass" : `${n} passes`;
-  return n === 1 ? "1 pase" : `${n} pases`;
 }

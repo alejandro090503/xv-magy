@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useLang, passesLabel } from "@/lib/i18n";
+import { useLang } from "@/lib/i18n";
 
 const PARTICLES = [
   { left: "7%",  size: 4, dur: 9,  del: 0,   color: "#ffb545" },
@@ -103,15 +103,12 @@ export default function Hero() {
   const xvRef      = useRef<HTMLDivElement>(null);
   const dateRef    = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
-  const [persona, setPersona] = useState<{ para: string; pases: number } | null>(null);
+  const [persona, setPersona] = useState<{ para: string } | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const para = params.get("para");
-    const rawP = params.get("pases");
-    const n = rawP ? parseInt(rawP, 10) : 1;
-    const validN = isNaN(n) || n < 1 || n > 20 ? 1 : n;
-    if (para) setPersona({ para, pases: validN });
+    if (para) setPersona({ para });
   }, []);
 
   useEffect(() => {
@@ -342,8 +339,6 @@ export default function Hero() {
                   }}>
                     {persona.para}
                   </strong>
-                  <br />
-                  {t("heroWith")} {passesLabel(persona.pases, lang)}
                 </p>
               )}
             </div>

@@ -8,6 +8,7 @@ import Ubicacion from "./Ubicacion";
 import CalendarioBtn from "./CalendarioBtn";
 import Itinerario from "./Itinerario";
 import DressCode from "./DressCode";
+import Carrusel from "./Carrusel";
 import Familia from "./Familia";
 import MesaRegalos from "./MesaRegalos";
 import InstagramSection from "./InstagramSection";
@@ -170,6 +171,15 @@ export default function InvitacionClient() {
         <ScrollReveal>
           <DressCode />
         </ScrollReveal>
+
+        <ScrollReveal>
+          <Ornament />
+        </ScrollReveal>
+
+        {/* CARRUSEL DE FOTOS — rueda 3D.
+            Sin ScrollReveal a proposito: ese wrapper anima translateY sobre el
+            contenedor y rompe el preserve-3d del anillo. */}
+        <Carrusel />
 
         <ScrollReveal>
           <Ornament />

@@ -3,12 +3,30 @@ import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useT, type TKey } from "@/lib/i18n";
 
-const ITEMS: { time: string; key: TKey; gem: number }[] = [
-  { time: "12:00 pm", key: "itMass", gem: 0 },
-  { time: "5:00 pm", key: "itDinner", gem: 1 },
-  { time: "7:00 pm", key: "itWaltz", gem: 2 },
-  { time: "8:00 pm", key: "itDance", gem: 0 },
-  { time: "1:00 am", key: "itEnd", gem: 1 },
+/**
+ * Iconos: Material Design Icons (MDI, Apache 2.0), servidos por Iconify.
+ * Se descargaron los trazos reales del set — no hay dibujo a mano.
+ */
+const ICONOS: Record<string, React.ReactNode> = {
+  church: (
+    <path d="M18 12.22V9l-5-2.5V5h2V3h-2V1h-2v2H9v2h2v1.5L6 9v3.22L2 14v8h8v-3c0-1.1.9-2 2-2s2 .9 2 2v3h8v-8zm-6 1.28c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5" />
+  ),
+  cutlery: (
+    <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4" />
+  ),
+  waltz: (
+    <path d="M14 3.5c0 .83-.67 1.5-1.5 1.5S11 4.33 11 3.5S11.67 2 12.5 2s1.5.67 1.5 1.5M8.5 5C7.67 5 7 5.67 7 6.5S7.67 8 8.5 8S10 7.33 10 6.5S9.33 5 8.5 5m5.5 7l-.78-2.25h2.96l2.16-1.08c.37-.17.52-.63.33-1a.737.737 0 0 0-1-.34l-.82.41l-.49-.84c-.29-.65-1-1.02-1.7-.86l-2.47.53c-.69.15-1.19.78-1.19 1.5v.7l-2.43 1.62h.01c-.08.07-.19.16-.25.28l-.89 1.77l-1.78.89c-.37.17-.52.64-.33 1.01a.753.753 0 0 0 1.01.33l2.22-1.11L9.6 11.5L11 13c-1 3-8 7-8 7s4 2 9 2s9-2 9-2s-5-4-7-8m2.85-.91l-.32.16h-1.2l.06.16c.52 1.03 1.28 2.09 2.11 3.03l-.53-3.41z" />
+  ),
+  party: (
+    <path d="m14.53 1.45l-1.08 1.08l1.6 1.6q.33.375.33.87c0 .495-.11.64-.33.86L11.5 9.47l1 1.08l3.63-3.61c.53-.59.79-1.24.79-1.94s-.26-1.36-.79-1.95zm-3.98 2.02L9.47 4.55l.61.56c.22.22.33.52.33.89s-.11.67-.33.89l-.61.56l1.08 1.08l.56-.61c.53-.59.8-1.23.8-1.92c0-.72-.27-1.37-.8-1.97zM21 5.06c-.69 0-1.33.27-1.92.8l-5.63 5.64l1.08 1l5.58-5.56c.25-.25.55-.38.89-.38s.64.13.89.38l.61.61l1.03-1.08l-.56-.61c-.59-.53-1.25-.8-1.97-.8M7 8L2 22l14-5zm12 3.06c-.7 0-1.34.27-1.94.8l-1.59 1.59l1.08 1.08l1.59-1.59c.25-.25.53-.38.86-.38s.63.13.88.38l1.62 1.59l1.05-1.03l-1.6-1.64c-.59-.53-1.25-.8-1.95-.8" />
+  ),
+};
+
+const ITEMS: { time: string; key: TKey; gem: number; icon: string; alt: TKey }[] = [
+  { time: "12:00 pm", key: "itMass", gem: 0, icon: "church", alt: "itMassIcon" },
+  { time: "5:00 pm", key: "itDinner", gem: 1, icon: "cutlery", alt: "itDinnerIcon" },
+  { time: "7:00 pm", key: "itWaltz", gem: 2, icon: "waltz", alt: "itWaltzIcon" },
+  { time: "8:00 pm — 1:00 am", key: "itDance", gem: 0, icon: "party", alt: "itDanceIcon" },
 ];
 
 const GEM_COLORS = [
@@ -69,11 +87,15 @@ function ItinerarioItem({
   event,
   gemIdx,
   delay,
+  icon,
+  iconAlt,
 }: {
   time: string;
   event: string;
   gemIdx: number;
   delay: number;
+  icon: string;
+  iconAlt: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "0px 0px -80px 0px" });
@@ -93,22 +115,37 @@ function ItinerarioItem({
         width: "100%",
       }}
     >
-      {/* Gema — pop spring */}
+      {/* Medallón con el icono de la actividad — pop spring */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 1 } : {}}
         transition={{ type: "spring", stiffness: 420, damping: 14, delay }}
         style={{
-          width: 9,
-          height: 9,
-          background: gem.bg,
-          transform: "rotate(45deg)",
-          borderRadius: 2,
-          boxShadow: gem.shadow,
-          marginBottom: 18,
+          width: 54,
+          height: 54,
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background:
+            "linear-gradient(150deg,rgba(255,255,255,0.96),rgba(241,224,251,0.92))",
+          border: "1px solid rgba(166,124,1,0.34)",
+          boxShadow: `${gem.shadow}, inset 0 1px 0 rgba(255,255,255,0.95)`,
+          marginBottom: 16,
           flexShrink: 0,
         }}
-      />
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="26"
+          height="26"
+          role="img"
+          aria-label={iconAlt}
+          fill="url(#itin-grad)"
+        >
+          {ICONOS[icon]}
+        </svg>
+      </motion.div>
 
       {/* Hora */}
       <motion.div
@@ -117,9 +154,9 @@ function ItinerarioItem({
         transition={{ duration: 0.7, ease: "easeOut", delay: delay + 0.08 }}
         style={{
           fontFamily: "var(--font-cormorant), serif",
-          fontSize: 36,
+          fontSize: 32,
           fontWeight: 600,
-          letterSpacing: 8,
+          letterSpacing: 6,
           color: "#1f1620",
           lineHeight: 1,
           marginBottom: 6,
@@ -156,6 +193,17 @@ export default function Itinerario() {
 
   return (
     <section style={{ padding: "64px 24px", overflow: "visible" }}>
+      {/* Degradado compartido de la paleta (lila → dorado) para los iconos */}
+      <svg width="0" height="0" aria-hidden="true" style={{ position: "absolute" }}>
+        <defs>
+          <linearGradient id="itin-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#5a2170" />
+            <stop offset="55%" stopColor="#8b3fa6" />
+            <stop offset="100%" stopColor="#a67c01" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <h2 style={{
         fontFamily: "var(--font-great-vibes), cursive",
         fontSize: 50,
@@ -195,6 +243,8 @@ export default function Itinerario() {
             event={t(item.key)}
             gemIdx={item.gem}
             delay={0}
+            icon={item.icon}
+            iconAlt={t(item.alt)}
           />
         ))}
       </div>

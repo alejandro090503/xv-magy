@@ -13,7 +13,6 @@ type Choice = "yes" | "no" | "";
 export default function RSVPSection() {
   const { t } = useLang();
   const searchParams = useSearchParams();
-  const [pases, setPases]     = useState(1);
   const [para, setPara]       = useState<string | null>(null);
   const [names, setNames]     = useState<string[]>([""]);
   const [choice, setChoice]   = useState<Choice>("yes");
@@ -24,13 +23,8 @@ export default function RSVPSection() {
 
   /* Parse query params + check deadline */
   useEffect(() => {
-    const rawP    = searchParams.get("pases");
-    const n       = rawP ? parseInt(rawP, 10) : 1;
-    const validN  = isNaN(n) || n < 1 || n > 20 ? 1 : n;
-    const paraQ   = searchParams.get("para");
+    const paraQ = searchParams.get("para");
 
-    setPases(validN);
-    setNames(Array.from({ length: validN }, () => ""));
     setPara(paraQ);
     setFrozen(Date.now() > RSVP_DEADLINE.getTime());
   }, [searchParams]);
@@ -47,7 +41,7 @@ export default function RSVPSection() {
       if (inv.estado === "confirmado") {
         setChoice("yes");
         const nm: string[] = Array.isArray(inv.nombres_confirmados) ? inv.nombres_confirmados : [];
-        setNames(prev => prev.map((_, i) => nm[i] ?? ""));
+        if (nm.length) setNames(nm);
       } else if (inv.estado === "declino") {
         setChoice("no");
       }
@@ -55,6 +49,14 @@ export default function RSVPSection() {
   }, [para]);
 
   useEffect(() => { preFill(); }, [preFill]);
+
+  const MAX_NOMBRES = 20;
+
+  const addName = () =>
+    setNames(prev => (prev.length >= MAX_NOMBRES ? prev : [...prev, ""]));
+
+  const removeName = (i: number) =>
+    setNames(prev => (prev.length <= 1 ? prev : prev.filter((_, k) => k !== i)));
 
   const handleName = (i: number, val: string) => {
     setNames(prev => {
@@ -131,7 +133,7 @@ export default function RSVPSection() {
     fontWeight: 600,
     fontSize: 15,
     letterSpacing: 1.5,
-    color: active ? (isYes ? "#5a2170" : "#5a2170") : "#7d4a68",
+    color: active ? (isYes ? "#5a2170" : "#5a2170") : "#653552",
     cursor: frozen ? "not-allowed" : "pointer",
     transition: "all .2s",
     opacity: frozen ? 0.55 : 1,
@@ -191,20 +193,6 @@ export default function RSVPSection() {
           </div>
         )}
 
-        {/* Badge de pases */}
-        <div className="gold-btn" style={{
-          display: "block", width: "fit-content",
-          margin: "0 auto 18px",
-          background: "linear-gradient(135deg,#8b3fa6,#5a2170)",
-          color: "#fff", borderRadius: 30,
-          padding: "5px 20px",
-          fontFamily: "var(--font-cormorant), serif",
-          fontStyle: "italic", fontSize: 15, letterSpacing: 2,
-          textAlign: "center",
-        }}>
-          {pases === 1 ? t("passAvailOne") : `${pases} ${t("passAvailMany")}`}
-        </div>
-
         {/* Fecha límite */}
         <p style={{
           textAlign: "center",
@@ -238,7 +226,7 @@ export default function RSVPSection() {
         {/* Campos de nombre — solo si choice === yes */}
         {choice === "yes" && (
           <div style={{ marginBottom: 8 }}>
-            {Array.from({ length: pases }).map((_, i) => (
+            {names.map((_, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
                 <div style={{
                   flexShrink: 0, width: 30, height: 30, borderRadius: "50%",
@@ -272,8 +260,50 @@ export default function RSVPSection() {
                   onFocus={(e) => { if (!frozen) e.currentTarget.style.borderColor = "#8b3fa6"; }}
                   onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(139,63,166,0.25)")}
                 />
+
+                {names.length > 1 && (
+                  <button
+                    type="button"
+                    disabled={frozen}
+                    onClick={() => removeName(i)}
+                    aria-label={t("rsvpRemove")}
+                    style={{
+                      flexShrink: 0, width: 34, height: 34, borderRadius: "50%",
+                      border: "1px solid rgba(139,63,166,0.22)",
+                      background: "rgba(255,245,249,0.70)",
+                      color: "#8b3fa6", fontSize: 18, lineHeight: 1,
+                      cursor: frozen ? "not-allowed" : "pointer",
+                      opacity: frozen ? 0.55 : 1,
+                    }}
+                  >
+                    &times;
+                  </button>
+                )}
               </div>
             ))}
+
+            {names.length < MAX_NOMBRES && (
+              <button
+                type="button"
+                disabled={frozen}
+                onClick={addName}
+                style={{
+                  display: "block", margin: "2px auto 0",
+                  padding: "9px 20px", minHeight: 40,
+                  borderRadius: 30,
+                  border: "1px dashed rgba(139,63,166,0.40)",
+                  background: "transparent",
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontStyle: "italic", fontWeight: 600,
+                  fontSize: 15, letterSpacing: 1.5,
+                  color: "#5a2170",
+                  cursor: frozen ? "not-allowed" : "pointer",
+                  opacity: frozen ? 0.55 : 1,
+                }}
+              >
+                {t("rsvpAddCompanion")}
+              </button>
+            )}
           </div>
         )}
 
