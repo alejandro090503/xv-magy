@@ -186,34 +186,6 @@ export default function InvitacionClient() {
           <Ornament />
         </ScrollReveal>
 
-        {/* AVISO SOLO ADULTOS */}
-        <ScrollReveal>
-          <section style={{ padding: "0 26px 40px", textAlign: "center" }}>
-            <div style={{
-              maxWidth: 380,
-              margin: "0 auto",
-              padding: "22px 24px",
-              borderRadius: 20,
-              border: "1px solid rgba(139,63,166,0.22)",
-              background: "linear-gradient(145deg,rgba(255,255,255,0.85),rgba(251,247,255,0.95))",
-              boxShadow: "0 6px 24px rgba(90,33,112,0.08)",
-            }}>
-              <p style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontStyle: "italic",
-                fontWeight: 600,
-                fontSize: 17,
-                color: "#5a2170",
-                letterSpacing: 0.4,
-                lineHeight: 1.6,
-                margin: 0,
-              }}>
-                {t("adultsOnly")}
-              </p>
-            </div>
-          </section>
-        </ScrollReveal>
-
         {/* MESA DE REGALOS */}
         <ScrollReveal>
           <MesaRegalos />
