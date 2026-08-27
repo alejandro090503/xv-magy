@@ -66,9 +66,9 @@ export default function InvitacionClient() {
           position: "relative",
           overflowX: "clip",
           zIndex: 1,
-          backgroundColor: "rgba(251,247,255,0.72)",
-          backdropFilter: "blur(2.5px)",
-          WebkitBackdropFilter: "blur(2.5px)",
+          backgroundColor: "rgba(251,247,255,0.66)",
+          backdropFilter: "blur(1px)",
+          WebkitBackdropFilter: "blur(1px)",
           backgroundImage: `
             radial-gradient(circle at 22% 12%, rgba(209,157,1,0.055) 0 2.5px, transparent 3px),
             radial-gradient(circle at 71% 41%, rgba(209,157,1,0.045) 0 3.5px, transparent 4px),

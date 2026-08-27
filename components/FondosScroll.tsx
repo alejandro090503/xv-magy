@@ -158,7 +158,7 @@ export default function FondosScroll() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(251,247,255,0.26) 0%, rgba(239,202,255,0.10) 35%, rgba(239,202,255,0.12) 65%, rgba(251,247,255,0.30) 100%)",
+            "linear-gradient(180deg, rgba(251,247,255,0.22) 0%, rgba(239,202,255,0.08) 35%, rgba(239,202,255,0.09) 65%, rgba(251,247,255,0.26) 100%)",
         }}
       />
     </div>
