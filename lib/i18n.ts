@@ -46,8 +46,14 @@ export const dict = {
       "Hoy comienza una nueva etapa llena de sueños, ilusiones y momentos que guardaré por siempre en mi corazón. Quiero compartir contigo la emoción, la magia y la alegría de esta noche tan especial.",
 
     /* ── Familia ── */
-    familyKicker: "Acompañada de",
+    familyKicker: "Con la bendición de",
     familyTitle: "Mi Familia",
+
+    /* ── Cierre ── */
+    closingText:
+      "Con mucha ilusión y cariño, te espero para compartir juntos este día tan especial. Tu presencia hará de esta celebración un recuerdo lleno de alegría y amor.",
+    closingName: "Magaly",
+    closingAlt: "Magaly de niña",
     courtTitle: "Cortejo de Honor",
 
     /* ── Fecha ── */
@@ -199,8 +205,14 @@ export const dict = {
       "Today a new chapter begins, full of dreams, hopes and moments I will keep in my heart forever. I want to share with you the excitement, the magic and the joy of this very special night.",
 
     /* ── Family ── */
-    familyKicker: "Together with",
+    familyKicker: "With the blessing of",
     familyTitle: "My Family",
+
+    /* ── Cierre ── */
+    closingText:
+      "With great excitement and love, I look forward to sharing this very special day with you. Your presence will make this celebration a memory full of joy and love.",
+    closingName: "Magaly",
+    closingAlt: "Magaly as a little girl",
     courtTitle: "Court of Honor",
 
     /* ── Date ── */

@@ -14,6 +14,7 @@ import MesaRegalos from "./MesaRegalos";
 import InstagramSection from "./InstagramSection";
 import RSVPWrapper from "./RSVPWrapper";
 import Footer from "./Footer";
+import Cierre from "./Cierre";
 import MusicFab, { type MusicFabHandle } from "./MusicFab";
 import ScrollReveal from "./ScrollReveal";
 import FondosScroll from "./FondosScroll";
@@ -235,6 +236,10 @@ export default function InvitacionClient() {
         <RSVPWrapper />
 
         {/* FOOTER */}
+        <ScrollReveal>
+          <Cierre />
+        </ScrollReveal>
+
         <ScrollReveal>
           <Footer />
         </ScrollReveal>

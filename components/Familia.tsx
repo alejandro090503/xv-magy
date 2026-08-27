@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const CORTEJO = [
   "Jedrek Gutierrez",
   "Ulysses Torres",
-  "Isac Aburto",
+  "Isaac Aburto",
   "Alexis Bermudez",
   "Andy Camacho",
   "Luis Avila",

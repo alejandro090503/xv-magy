@@ -137,6 +137,18 @@ body {
   filter: drop-shadow(0 0 10px rgba(209,157,1,.6)) drop-shadow(0 0 28px rgba(209,157,1,.35)) drop-shadow(0 2px 6px rgba(90,33,112,.22));
 }
 
+/* Variante para el CIERRE: va sobre foto con velo oscuro, asi que el
+   degradado sube a dorados claros (el #a8822f del .gold-shine base esta
+   calibrado para fondo claro y sobre oscuro se apaga). Pico #f2d478:
+   10.1:1 sobre el velo (38,18,48). */
+.gold-shine-cierre {
+  background-image: linear-gradient(100deg,
+    #c9a24e 0%, #dcb85f 12%, #edcd72 22%, #f2d478 30%, #f2d478 36%,
+    #e6c468 46%, #c9a24e 58%, #edcd72 72%, #dcb85f 84%, #c9a24e 100%);
+  filter: drop-shadow(0 0 12px rgba(242,212,120,.55)) drop-shadow(0 0 34px rgba(209,157,1,.40));
+  animation-duration: 6.5s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gold-shine { animation: none; background-position: 50% center; }
 }
