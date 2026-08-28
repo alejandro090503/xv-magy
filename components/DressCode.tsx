@@ -157,6 +157,20 @@ export default function DressCode() {
             }}>{t("dressWomen")}</div>
           </div>
         </div>
+
+        <p style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontStyle: "italic",
+          fontWeight: 500,
+          fontSize: 17,
+          lineHeight: 1.55,
+          color: "#5a2170",
+          textAlign: "center",
+          margin: "22px auto 0",
+          maxWidth: 300,
+        }}>
+          {t("dressComfort")}
+        </p>
       </div>
     </section>
   );
