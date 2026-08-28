@@ -100,8 +100,31 @@ export default function DressCode() {
           maxWidth: 320,
           position: "relative",
         }}>
-          {t("dressNote1")} <span style={{ whiteSpace: "nowrap" }}>(#e292fe)</span> {t("dressNote2")} <span style={{ whiteSpace: "nowrap" }}>(#d19d01)</span> {t("dressNote3")}
+          {t("dressNote1")} {t("dressNote2")} {t("dressNote3")}
         </p>
+
+        {/* Los dos colores reservados, en muestras. Antes iban como codigos
+            hexadecimales entre parentesis dentro del parrafo: el invitado no
+            lee un hex, ve el color. */}
+        <div
+          aria-hidden
+          style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 14 }}
+        >
+          {["#e292fe", "#d19d01"].map((c) => (
+            <span
+              key={c}
+              style={{
+                width: 26,
+                height: 26,
+                borderRadius: "50%",
+                background: c,
+                border: "1px solid rgba(90,33,112,0.28)",
+                boxShadow: "0 2px 8px rgba(90,33,112,0.18), inset 0 1px 2px rgba(255,255,255,0.45)",
+                display: "block",
+              }}
+            />
+          ))}
+        </div>
 
         {/* Caballeros / Damas */}
         <div style={{ display: "flex", justifyContent: "center", gap: 24, marginTop: 30 }}>

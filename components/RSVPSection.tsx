@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useLang, type TKey } from "@/lib/i18n";
 
 const PANEL_API = "https://panel-invitados.vercel.app/api/confirmar";
-const RSVP_URL  = "xv-magy";
+const RSVP_URL  = "https://xv-magy.vercel.app";
 /* PENDIENTE: fecha límite de RSVP no confirmada por el cliente — se congela hasta el día del evento */
 const RSVP_DEADLINE = new Date(2026, 9, 3, 11, 0, 0, 0);
 
@@ -20,6 +20,9 @@ export default function RSVPSection() {
   const [feedback, setFeedback] = useState<{ msg: string; color: string } | null>(null);
   const [frozen, setFrozen]   = useState(false);
   const [btnKey, setBtnKey] = useState<TKey>("rsvpSubmit");
+  const [pases, setPases]   = useState(1);
+  const [cerrada, setCerrada] = useState(false);
+  const [resumen, setResumen] = useState<{ estado: "confirmado" | "declino"; nombres: string[] } | null>(null);
 
   /* Parse query params + check deadline */
   useEffect(() => {
@@ -38,24 +41,36 @@ export default function RSVPSection() {
       const d = await r.json();
       if (!d?.ok || !d.invitado) return;
       const inv = d.invitado;
+      /* Los pases del panel mandan: ignoramos cualquier ?pases= manipulado. */
+      const p = typeof inv.pases === "number" && inv.pases > 0 && inv.pases <= 20 ? inv.pases : 1;
+      setPases(p);
       if (inv.estado === "confirmado") {
         setChoice("yes");
         const nm: string[] = Array.isArray(inv.nombres_confirmados) ? inv.nombres_confirmados : [];
-        if (nm.length) setNames(nm);
+        /* Reabrimos con tantos campos como personas confirmó, no con el tope. */
+        setNames(nm.length ? nm.slice(0, p) : [""]);
+        /* Ya hay respuesta guardada: la sección arranca cerrada. */
+        setResumen({ estado: "confirmado", nombres: nm });
+        setCerrada(true);
+        setBtnKey("rsvpUpdate");
       } else if (inv.estado === "declino") {
         setChoice("no");
+        setNames([""]);
+        setResumen({ estado: "declino", nombres: [] });
+        setCerrada(true);
+        setBtnKey("rsvpUpdate");
       }
     } catch { /* silencioso */ }
   }, [para]);
 
   useEffect(() => { preFill(); }, [preFill]);
 
-  const MAX_NOMBRES = 20;
 
-  const addName = () =>
-    setNames(prev => (prev.length >= MAX_NOMBRES ? prev : [...prev, ""]));
+  /* El invitado usa solo los pases que necesite, hasta el tope del panel. */
+  const addPase = () =>
+    setNames(prev => (prev.length >= pases ? prev : [...prev, ""]));
 
-  const removeName = (i: number) =>
+  const removePase = (i: number) =>
     setNames(prev => (prev.length <= 1 ? prev : prev.filter((_, k) => k !== i)));
 
   const handleName = (i: number, val: string) => {
@@ -88,9 +103,10 @@ export default function RSVPSection() {
       });
       const d = await r.json();
       if (d?.ok) {
-        setBtnKey(estado === "confirmado" ? "rsvpConfirmed" : "rsvpSent");
-        setFb(t(estado === "confirmado" ? "rsvpThanksYes" : "rsvpThanksNo"), "#5a2170");
-        setTimeout(() => setBtnKey("rsvpUpdate"), 2400);
+        setBtnKey("rsvpUpdate");
+        setFeedback(null);
+        setResumen({ estado, nombres: nombresArr });
+        setCerrada(true);
       } else {
         setBtnKey("rsvpSubmit");
         setFb(t("rsvpErrSend"), "#b91c1c");
@@ -203,6 +219,33 @@ export default function RSVPSection() {
           {t("rsvpSub")}
         </p>
 
+        {/* Nombre del invitado — grande, dorado con barrido */}
+        {para && (
+          <p className="gold-shine" style={{
+            textAlign: "center",
+            fontFamily: "var(--font-great-vibes), cursive",
+            fontSize: "clamp(34px,9vw,48px)",
+            lineHeight: 1.15,
+            marginBottom: 6,
+          }}>
+            {para}
+          </p>
+        )}
+
+        {/* Pases asignados desde el panel */}
+        {para && !cerrada && (
+          <p style={{
+            textAlign: "center",
+            fontFamily: "var(--font-cormorant), serif",
+            fontStyle: "italic", fontWeight: 600, fontSize: 16,
+            color: "#5a2170", marginBottom: 16,
+          }}>
+            {pases === 1 ? t("rsvpPasesNote1") : t("rsvpPasesNoteN").replace("{n}", String(pases))}
+          </p>
+        )}
+
+        {/* ── BANDEJA (se cierra al confirmar) ── */}
+        {!cerrada && (<>
         {/* Toggle Sí/No asistiré */}
         <div style={{ display: "flex", gap: 10, marginBottom: 18 }}>
           <button
@@ -226,6 +269,17 @@ export default function RSVPSection() {
         {/* Campos de nombre — solo si choice === yes */}
         {choice === "yes" && (
           <div style={{ marginBottom: 8 }}>
+            {pases > 1 && (
+              <p style={{
+                textAlign: "center",
+                fontFamily: "var(--font-cormorant), serif",
+                fontStyle: "italic", fontSize: 14.5, lineHeight: 1.55,
+                color: "#653552", opacity: 0.92,
+                margin: "0 auto 16px", maxWidth: 330,
+              }}>
+                {t("rsvpContadorNota")}
+              </p>
+            )}
             {names.map((_, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
                 <div style={{
@@ -243,7 +297,7 @@ export default function RSVPSection() {
                 <input
                   type="text"
                   disabled={frozen}
-                  placeholder={i === 0 ? t("rsvpNamePlaceholder") : `${t("rsvpCompanion")} ${i + 1}`}
+                  placeholder={`${t("rsvpGuestPlaceholder")} ${i + 1}`}
                   value={names[i] ?? ""}
                   onChange={(e) => handleName(i, e.target.value)}
                   style={{
@@ -265,8 +319,9 @@ export default function RSVPSection() {
                   <button
                     type="button"
                     disabled={frozen}
-                    onClick={() => removeName(i)}
-                    aria-label={t("rsvpRemove")}
+                    onClick={() => removePase(i)}
+                    aria-label={t("rsvpQuitarPase")}
+                    title={t("rsvpQuitarPase")}
                     style={{
                       flexShrink: 0, width: 34, height: 34, borderRadius: "50%",
                       border: "1px solid rgba(139,63,166,0.22)",
@@ -282,11 +337,12 @@ export default function RSVPSection() {
               </div>
             ))}
 
-            {names.length < MAX_NOMBRES && (
+            {/* Contador: sube hasta el tope de pases asignados en el panel */}
+            {names.length < pases ? (
               <button
                 type="button"
                 disabled={frozen}
-                onClick={addName}
+                onClick={addPase}
                 style={{
                   display: "block", margin: "2px auto 0",
                   padding: "9px 20px", minHeight: 40,
@@ -301,8 +357,16 @@ export default function RSVPSection() {
                   opacity: frozen ? 0.55 : 1,
                 }}
               >
-                {t("rsvpAddCompanion")}
+                {t("rsvpAgregarPase")} ({names.length}/{pases})
               </button>
+            ) : pases > 1 && (
+              <p style={{
+                textAlign: "center", margin: "2px auto 0",
+                fontFamily: "var(--font-cormorant), serif",
+                fontStyle: "italic", fontSize: 14, color: "#8b3fa6", opacity: 0.85,
+              }}>
+                {t("rsvpTopePases")}
+              </p>
             )}
           </div>
         )}
@@ -352,6 +416,62 @@ export default function RSVPSection() {
         >
           {frozen ? t("rsvpClosedBtn") : t(btnKey)}
         </button>
+        </>)}
+
+        {/* ── AGRADECIMIENTO (bandeja cerrada) ── */}
+        {cerrada && resumen && (
+          <div style={{
+            padding: "26px 22px",
+            background: "linear-gradient(145deg,rgba(139,63,166,0.08),rgba(228,194,245,0.14))",
+            border: "1.5px solid rgba(139,63,166,0.28)",
+            borderRadius: 16,
+            textAlign: "center",
+          }}>
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8b3fa6"
+                 strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+                 style={{ display: "block", margin: "0 auto 10px" }} aria-hidden="true">
+              <circle cx="12" cy="12" r="10" /><polyline points="8.5 12.5 11 15 16 9.5" />
+            </svg>
+            <p style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: 21, fontWeight: 700, color: "#5a2170",
+              marginBottom: 8, lineHeight: 1.35,
+            }}>
+              {t(resumen.estado === "confirmado" ? "rsvpGraciasYes" : "rsvpGraciasNo")}
+            </p>
+            <p style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontStyle: "italic", fontSize: 15.5, color: "#653552",
+              lineHeight: 1.6, marginBottom: 18,
+            }}>
+              {resumen.estado === "declino"
+                ? t("rsvpGraciasNoSub")
+                : resumen.nombres.length === 1
+                  ? t("rsvpGraciasOne").replace("{nombre}", resumen.nombres[0])
+                  : t("rsvpGraciasMany")
+                      .replace("{n}", String(resumen.nombres.length))
+                      .replace("{lista}", resumen.nombres.join(", "))}
+            </p>
+            <button
+              type="button"
+              disabled={frozen}
+              onClick={() => { setCerrada(false); setFeedback(null); }}
+              style={{
+                padding: "11px 22px",
+                border: "1.5px solid rgba(139,63,166,0.38)",
+                background: "transparent",
+                fontFamily: "var(--font-cormorant), serif",
+                fontStyle: "italic", fontSize: 15, color: "#5a2170",
+                borderRadius: 24,
+                cursor: frozen ? "not-allowed" : "pointer",
+                opacity: frozen ? 0.45 : 1,
+                transition: "all .25s",
+              }}
+            >
+              {t("rsvpEditar")}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
