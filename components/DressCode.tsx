@@ -100,15 +100,27 @@ export default function DressCode() {
           maxWidth: 320,
           position: "relative",
         }}>
-          {t("dressNote1")} {t("dressNote2")} {t("dressNote3")}
+          <strong style={{ fontWeight: 700 }}>{t("dressNote1")}</strong> {t("dressNote2")}
         </p>
 
         {/* Los dos colores reservados, en muestras. Antes iban como codigos
             hexadecimales entre parentesis dentro del parrafo: el invitado no
             lee un hex, ve el color. */}
+        <div style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontStyle: "italic",
+          fontWeight: 600,
+          fontSize: 14,
+          letterSpacing: 1.6,
+          textTransform: "uppercase",
+          color: "#653552",
+          textAlign: "center",
+          marginTop: 16,
+        }}>{t("dressAvoid")}</div>
+
         <div
           aria-hidden
-          style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 14 }}
+          style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 8 }}
         >
           {["#e292fe", "#d19d01"].map((c) => (
             <span
