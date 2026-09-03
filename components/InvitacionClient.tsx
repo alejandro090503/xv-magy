@@ -12,7 +12,6 @@ import Carrusel from "./Carrusel";
 import Familia from "./Familia";
 import MesaRegalos from "./MesaRegalos";
 import InstagramSection from "./InstagramSection";
-import RSVPWrapper from "./RSVPWrapper";
 import Footer from "./Footer";
 import Cierre from "./Cierre";
 import MusicFab, { type MusicFabHandle } from "./MusicFab";
@@ -203,9 +202,6 @@ export default function InvitacionClient() {
         <ScrollReveal>
           <Ornament />
         </ScrollReveal>
-
-        {/* RSVP */}
-        <RSVPWrapper />
 
         {/* FOOTER */}
         <ScrollReveal>
